@@ -21,6 +21,7 @@ class GameAdapter(
                 homeGameTitleTV.text = item.title
                 homeShortDescTV.text = item.short_description
                 homeGenreTV.text = item.genre
+                homePlatformTV.text = item.platform
             }
         }
     }

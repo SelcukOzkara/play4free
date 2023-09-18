@@ -44,21 +44,42 @@
                 android:id="@+id/homeShortDescTV"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:layout_marginTop="16dp"
+                android:text="TextView"
                 app:layout_constraintStart_toStartOf="@+id/homeGameTitleTV"
                 app:layout_constraintTop_toBottomOf="@+id/homeGameTitleTV" />
+
+            <TextView
+                android:id="@+id/homeGenreInfoTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Genre:"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/homeShortDescTV"
+                app:layout_constraintTop_toBottomOf="@+id/homeShortDescTV" />
 
             <TextView
                 android:id="@+id/homeGenreTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="8dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/homeShortDescTV"
-                app:layout_constraintTop_toBottomOf="@+id/homeShortDescTV" />
+                app:layout_constraintBottom_toBottomOf="@+id/homeGenreInfoTV"
+                app:layout_constraintStart_toEndOf="@+id/homeGenreInfoTV"
+                app:layout_constraintTop_toTopOf="@+id/homeGenreInfoTV" />
+
+            <TextView
+                android:id="@+id/homePlatformTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/homeGenreTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/homeGenreTV" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
