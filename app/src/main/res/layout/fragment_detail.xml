@@ -30,5 +30,99 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailThumbIV" />
 
+        <TextView
+            android:id="@+id/detailTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailPlayNowBTN" />
+
+        <TextView
+            android:id="@+id/detailDescTV"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/detailDecsTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailDecsTTV" />
+
+        <TextView
+            android:id="@+id/detailDecsTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/detailTitleTV"
+            app:layout_constraintTop_toBottomOf="@id/detailTitleTV" />
+
+        <TextView
+            android:id="@+id/detailReqTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/detailDescTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailDescTV" />
+
+        <TextView
+            android:id="@+id/detailOsTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/detailReqTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailReqTTV" />
+
+        <TextView
+            android:id="@+id/detailOsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/detailOsTTV"
+            app:layout_constraintStart_toEndOf="@+id/detailOsTTV"
+            app:layout_constraintTop_toTopOf="@+id/detailOsTTV" />
+
+        <TextView
+            android:id="@+id/detailCpuTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/detailOsTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailOsTTV" />
+
+        <TextView
+            android:id="@+id/detailCpuTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/detailCpuTTV"
+            app:layout_constraintStart_toEndOf="@+id/detailCpuTTV"
+            app:layout_constraintTop_toTopOf="@+id/detailCpuTTV" />
+
+        <TextView
+            android:id="@+id/detailRamTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/detailCpuTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailCpuTTV" />
+
+        <TextView
+            android:id="@+id/detailRamTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/detailRamTTV"
+            app:layout_constraintStart_toEndOf="@+id/detailRamTTV"
+            app:layout_constraintTop_toTopOf="@+id/detailRamTTV" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
