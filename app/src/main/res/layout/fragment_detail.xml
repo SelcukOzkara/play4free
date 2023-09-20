@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:text="OS:"
             app:layout_constraintStart_toStartOf="@+id/detailReqTTV"
             app:layout_constraintTop_toBottomOf="@+id/detailReqTTV" />
 
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:text="CPU:"
             app:layout_constraintStart_toStartOf="@+id/detailOsTTV"
             app:layout_constraintTop_toBottomOf="@+id/detailOsTTV" />
 
@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:text="RAM:"
             app:layout_constraintStart_toStartOf="@+id/detailCpuTTV"
             app:layout_constraintTop_toBottomOf="@+id/detailCpuTTV" />
 
@@ -123,6 +123,95 @@
             app:layout_constraintBottom_toBottomOf="@+id/detailRamTTV"
             app:layout_constraintStart_toEndOf="@+id/detailRamTTV"
             app:layout_constraintTop_toTopOf="@+id/detailRamTTV" />
+
+        <TextView
+            android:id="@+id/detailGpuTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="GPU:"
+            app:layout_constraintStart_toStartOf="@+id/detailRamTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailRamTTV" />
+
+        <TextView
+            android:id="@+id/detailGpuTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/detailGpuTTV"
+            app:layout_constraintStart_toEndOf="@+id/detailGpuTTV"
+            app:layout_constraintTop_toTopOf="@+id/detailGpuTTV" />
+
+        <TextView
+            android:id="@+id/detailStorageTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Storage:"
+            app:layout_constraintStart_toStartOf="@+id/detailGpuTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailGpuTTV" />
+
+        <TextView
+            android:id="@+id/detailStorageTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/detailStorageTTV"
+            app:layout_constraintStart_toEndOf="@+id/detailStorageTTV"
+            app:layout_constraintTop_toTopOf="@+id/detailStorageTTV" />
+
+        <TextView
+            android:id="@+id/detailScreenshotsTTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Screenshots"
+            app:layout_constraintStart_toStartOf="@+id/detailStorageTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailStorageTTV" />
+
+        <ImageView
+            android:id="@+id/detailScreen1IV"
+            android:layout_width="180dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="@+id/detailScreenshotsTTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailScreenshotsTTV" />
+
+        <ImageView
+            android:id="@+id/detailScreen2IV"
+            android:layout_width="180dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="@+id/detailScreen1IV"
+            app:layout_constraintStart_toEndOf="@+id/detailScreen1IV"
+            app:layout_constraintTop_toTopOf="@+id/detailScreen1IV" />
+
+        <ImageView
+            android:id="@+id/detailScreen3IV"
+            android:layout_width="180dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="@+id/detailScreen1IV"
+            app:layout_constraintTop_toBottomOf="@+id/detailScreen1IV" />
+
+        <ImageView
+            android:id="@+id/detailScreen4IV"
+            android:layout_width="180dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="@+id/detailScreen3IV"
+            app:layout_constraintStart_toEndOf="@+id/detailScreen3IV"
+            app:layout_constraintTop_toTopOf="@+id/detailScreen3IV" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
