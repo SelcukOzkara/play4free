@@ -2,6 +2,7 @@ package com.example.play4free.data
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.play4free.data.datamodels.GameDetail
 import com.example.play4free.data.datamodels.Games
 import com.example.play4free.data.local.GameDatabase
 import com.example.play4free.data.remote.GamesApi
@@ -20,6 +21,15 @@ class AppRepository(private val api: GamesApi, private val database: GameDatabas
             database.gameDao.insertGameList(gameList)
         }catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
+        }
+    }
+
+    suspend fun getGameDetail(id: Long): GameDetail?{
+        try {
+            return api.retrofitService.getGameDetail(id)
+        }catch (e:Exception){
+            Log.e(TAG, "Error loading Data from API: $e")
+            return null
         }
     }
 

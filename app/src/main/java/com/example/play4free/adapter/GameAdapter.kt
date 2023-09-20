@@ -2,6 +2,7 @@ package com.example.play4free.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import coil.load
 import com.example.play4free.GameViewModel
 import com.example.play4free.data.datamodels.Games
 import com.example.play4free.databinding.GameListItemBinding
+import com.example.play4free.ui.HomeFragmentDirections
 
 class GameAdapter(
     private var viewModel : GameViewModel
@@ -22,6 +24,10 @@ class GameAdapter(
                 homeShortDescTV.text = item.short_description
                 homeGenreTV.text = item.genre
                 homePlatformTV.text = item.platform
+
+                homeCV.setOnClickListener {
+                    it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
+                }
             }
         }
     }
