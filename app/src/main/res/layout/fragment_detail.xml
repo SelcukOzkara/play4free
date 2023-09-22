@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <ImageView
             android:id="@+id/detailThumbIV"
             android:layout_width="match_parent"
@@ -40,14 +42,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailPlayNowBTN" />
 
-        <TextView
+
+        <at.blogc.android.views.ExpandableTextView
             android:id="@+id/detailDescTV"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="TextView"
+            android:maxLines="3"
+            android:ellipsize="end"
+            app:animation_duration="750"
             app:layout_constraintStart_toStartOf="@+id/detailDecsTTV"
             app:layout_constraintTop_toBottomOf="@+id/detailDecsTTV" />
+
+        <TextView
+            android:id="@+id/detailReadMoreTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="read more"
+            app:layout_constraintEnd_toEndOf="@+id/detailDescTV"
+            app:layout_constraintTop_toBottomOf="@+id/detailDescTV" />
 
         <TextView
             android:id="@+id/detailDecsTTV"

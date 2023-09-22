@@ -9,6 +9,7 @@ import com.example.play4free.data.AppRepository
 import com.example.play4free.data.datamodels.GameDetail
 import com.example.play4free.data.local.getData
 import com.example.play4free.data.remote.GamesApi
+import com.example.play4free.data.remote.GiveawayApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,11 +17,16 @@ import kotlinx.coroutines.withContext
 class GameViewModel(application: Application): AndroidViewModel(application) {
 
     private var database = getData(application)
-    private val repo = AppRepository(GamesApi,database)
+    private val repo = AppRepository(GamesApi,GiveawayApi,database)
     val gameList = repo.gameList
+    val giveawayList = repo.giveawayList
+
+
     private val _gameDetail: MutableLiveData<GameDetail> = MutableLiveData()
     val gameDetail: LiveData<GameDetail>
         get() = _gameDetail
+
+
 
 
 
@@ -33,6 +39,12 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     fun getGameDetail(id: Long) {
         viewModelScope.launch (Dispatchers.IO) {
             _gameDetail.postValue(repo.getGameDetail(id)!!)
+        }
+    }
+
+    fun loadGiveawayList(){
+        viewModelScope.launch (Dispatchers.IO) {
+            repo.getGiveaway()
         }
     }
 }

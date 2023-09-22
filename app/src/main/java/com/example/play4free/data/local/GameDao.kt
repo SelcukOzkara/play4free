@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.play4free.data.datamodels.Games
+import com.example.play4free.data.datamodels.Giveaways
 
 @Dao
 interface GameDao {
@@ -16,4 +17,9 @@ interface GameDao {
     @Query("SELECT * FROM games_table")
     fun getAllGames():LiveData<List<Games>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertGiveawayList(giveawayList: List<Giveaways>)
+
+    @Query("SELECT * FROM giveaways_table")
+    fun getGiveaways():LiveData<List<Giveaways>>
 }

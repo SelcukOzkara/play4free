@@ -1,15 +1,16 @@
 package com.example.play4free.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.play4free.GameViewModel
-import com.example.play4free.R
 import com.example.play4free.databinding.FragmentDetailBinding
+
 
 class DetailFragment : Fragment() {
 
@@ -20,7 +21,7 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailBinding.inflate(inflater,container,false)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -29,8 +30,8 @@ class DetailFragment : Fragment() {
 
         viewModel.getGameDetail(requireArguments().getLong("id"))
 
-        viewModel.gameDetail.observe(viewLifecycleOwner){
-            with(binding){
+        viewModel.gameDetail.observe(viewLifecycleOwner) {
+            with(binding) {
                 detailThumbIV.load(it.thumbnail)
                 detailTitleTV.text = it.title
                 detailDescTV.text = it.description
@@ -43,10 +44,15 @@ class DetailFragment : Fragment() {
                 detailScreen2IV.load(it.screenshots[1].image)
                 detailScreen3IV.load(it.screenshots[2].image)
                 detailScreen4IV.load(it.screenshots[3].image)
+
+                detailDescTV.setInterpolator(OvershootInterpolator())
+
+                detailReadMoreTV.setOnClickListener {
+                        detailDescTV.toggle()
+                        if (!detailDescTV.isExpanded) detailReadMoreTV.text = "read less"
+                        else detailReadMoreTV.text = "read more"
+                }
             }
         }
-
-
     }
-
 }

@@ -23,4 +23,9 @@
             android:name="id"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/giveawayFragment"
+        android:name="com.example.play4free.ui.GiveawayFragment"
+        android:label="fragment_giveaway"
+        tools:layout="@layout/fragment_giveaway" />
 </navigation>
