@@ -8,29 +8,29 @@
     tools:context=".ui.LoginFragment" >
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextText"
+        android:id="@+id/loginMailET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/loginLogoIV"
+        app:layout_constraintStart_toStartOf="@+id/loginLogoIV"
+        app:layout_constraintTop_toBottomOf="@+id/loginLogoIV" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/loginPwET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintStart_toStartOf="@+id/loginMailET"
+        app:layout_constraintTop_toBottomOf="@+id/loginMailET" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/loginLogoIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="148dp"
@@ -40,24 +40,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/loginSignInBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
+        android:text="Sign In"
+        app:layout_constraintEnd_toEndOf="@+id/loginPwET"
+        app:layout_constraintStart_toStartOf="@+id/loginPwET"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button2"
+        android:id="@+id/loginSignUpBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        android:text="Sign Up"
+        app:layout_constraintEnd_toEndOf="@+id/loginSignInBTN"
+        app:layout_constraintStart_toStartOf="@+id/loginSignInBTN"
+        app:layout_constraintTop_toBottomOf="@+id/loginSignInBTN" />
 
     <TextView
         android:id="@+id/textView3"
@@ -65,6 +65,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/loginPwET"
+        app:layout_constraintTop_toBottomOf="@+id/loginPwET" />
 </androidx.constraintlayout.widget.ConstraintLayout>
