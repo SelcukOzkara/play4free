@@ -42,38 +42,12 @@ class HomeFragment : Fragment() {
         viewModel.loadGameList()
         binding.homeRV.adapter = gameAdapter
 
-        showDialog()
-
         viewModel.gameList.observe(viewLifecycleOwner){
             gameAdapter.submitList(it)
         }
     }
 
 
-    private fun showDialog() {
-        val binding2 : FragmentLoginBinding = FragmentLoginBinding.inflate(layoutInflater)
-        val dialog = Dialog(requireContext())
-        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        dialog.setCancelable(false)
-        dialog.setContentView(binding2.root)
-        dialog.window?.setLayout((WindowManager.LayoutParams.MATCH_PARENT), (resources.displayMetrics.heightPixels*0.8).toInt())
-//        dialog.window?.setGravity(Gravity.BOTTOM)
-        binding.homeRV.alpha = 0.2f
 
-        binding2.loginMailET.setText("Test")
-
-        binding2.loginSignUpBTN.setOnClickListener {
-            binding.homeRV.alpha = 1f
-            dialog.dismiss()
-        }
-
-       binding2.loginSignInBTN.setOnClickListener {
-           binding.homeRV.alpha = 1f
-           dialog.dismiss()
-       }
-
-
-        dialog.show()
-    }
 
 }
