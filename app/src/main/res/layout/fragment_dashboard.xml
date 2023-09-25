@@ -28,26 +28,24 @@
         app:layout_constraintStart_toStartOf="@+id/dashboardPbIV"
         app:layout_constraintTop_toBottomOf="@+id/dashboardPbIV" />
 
-    <EditText
-        android:id="@+id/editTextText"
+    <ImageButton
+        android:id="@+id/dashboardLogOutBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/dashboardPbIV"
-        app:layout_constraintStart_toStartOf="@+id/dashboardPbIV"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardPbIV" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/baseline_exit_to_app_24"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <ImageButton
+        android:id="@+id/dashboardSettingBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/dashboardUsernameTV"
-        app:layout_constraintStart_toStartOf="@+id/dashboardUsernameTV"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardUsernameTV" />
+        android:src="@drawable/baseline_settings_24"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboardPbIV"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardPbIV" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
