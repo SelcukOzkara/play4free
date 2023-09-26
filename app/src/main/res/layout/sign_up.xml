@@ -22,86 +22,120 @@
             android:layout_height="wrap_content"
             android:padding="24dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signUpUsernameET"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpUsernameLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="Username"
-                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signUpEmailET"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:endIconMode="clear_text"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                app:layout_constraintEnd_toEndOf="@+id/signUpUsernameET"
-                app:layout_constraintStart_toStartOf="@+id/signUpUsernameET"
-                app:layout_constraintTop_toBottomOf="@+id/signUpUsernameET" />
+                android:hint="Username">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signUpUsernameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpEmailLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/signUpUsernameLayout"
+                app:layout_constraintStart_toStartOf="@+id/signUpUsernameLayout"
+                app:layout_constraintTop_toBottomOf="@+id/signUpUsernameLayout"
+                app:endIconMode="clear_text"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Email">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signUpEmailET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpDateLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/signUpEmailLayout"
+                app:layout_constraintStart_toStartOf="@+id/signUpEmailLayout"
+                app:layout_constraintTop_toBottomOf="@+id/signUpEmailLayout"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Date">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signUpDateET"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/calendar"
+                android:inputType="date" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpPwLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:endIconMode = "password_toggle"
+                app:layout_constraintEnd_toEndOf="@+id/signUpDateLayout"
+                app:layout_constraintStart_toStartOf="@+id/signUpDateLayout"
+                app:layout_constraintTop_toBottomOf="@+id/signUpDateLayout"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="DD.MM.YYYY"
-                android:inputType="date"
-                app:layout_constraintEnd_toEndOf="@+id/signUpEmailET"
-                app:layout_constraintStart_toStartOf="@+id/signUpEmailET"
-                app:layout_constraintTop_toBottomOf="@+id/signUpEmailET" />
+                android:hint="Password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signUpPwET"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpPwSecLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:endIconMode = "password_toggle"
+                app:layout_constraintEnd_toEndOf="@+id/signUpPwLayout"
+                app:layout_constraintStart_toStartOf="@+id/signUpPwLayout"
+                app:layout_constraintTop_toBottomOf="@+id/signUpPwLayout"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="@+id/signUpDateET"
-                app:layout_constraintStart_toStartOf="@+id/signUpDateET"
-                app:layout_constraintTop_toBottomOf="@+id/signUpDateET" />
+                android:hint="Repeat Password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signUpPwSecET"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="Repeat Password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="@+id/signUpPwET"
-                app:layout_constraintStart_toStartOf="@+id/signUpPwET"
-                app:layout_constraintTop_toBottomOf="@+id/signUpPwET" />
+                android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/signUpCreateBTN"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
                 android:layout_marginTop="24dp"
                 android:text="Create Account"
-                app:layout_constraintEnd_toEndOf="@+id/signUpPwSecET"
-                app:layout_constraintStart_toEndOf="@+id/signUpAbortBTN"
-                app:layout_constraintTop_toBottomOf="@+id/signUpPwSecET" />
+                app:layout_constraintEnd_toEndOf="@+id/signUpPwSecLayout"
+                app:layout_constraintStart_toStartOf="@+id/signUpPwSecLayout"
+                app:layout_constraintTop_toBottomOf="@+id/signUpPwSecLayout" />
 
             <Button
                 android:id="@+id/signUpAbortBTN"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:text="Cancle"
-                app:layout_constraintEnd_toStartOf="@+id/signUpPwSecET"
-                app:layout_constraintStart_toStartOf="@+id/signUpPwSecET"
-                app:layout_constraintTop_toBottomOf="@+id/signUpPwSecET" />
+                app:layout_constraintEnd_toEndOf="@+id/signUpCreateBTN"
+                app:layout_constraintStart_toStartOf="@+id/signUpCreateBTN"
+                app:layout_constraintTop_toBottomOf="@+id/signUpCreateBTN" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
