@@ -10,7 +10,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.play4free.data.AppRepository
+import com.example.play4free.data.datamodels.FavGames
 import com.example.play4free.data.datamodels.GameDetail
+import com.example.play4free.data.datamodels.Games
 import com.example.play4free.data.datamodels.Profile
 import com.example.play4free.data.local.getData
 import com.example.play4free.data.remote.GamesApi
@@ -31,7 +33,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var database = getData(application)
     private val repo = AppRepository(GamesApi, GiveawayApi, database)
     val gameList = repo.gameList
+    val favList = repo.favList
     val giveawayList = repo.giveawayList
+    val newList = mutableListOf<Games>()
 
 
     private val _gameDetail: MutableLiveData<GameDetail> = MutableLiveData()
@@ -52,10 +56,28 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         setupUserEnv()
     }
 
+    fun addFav(newFav : Games){
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.addFav(newFav)
+        }
+    }
+
+    fun removeFav(remFav: Games){
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.remFav(remFav)
+        }
+    }
+
 
     fun loadGameList() {
         viewModelScope.launch(Dispatchers.IO) {
             repo.getGameList()
+        }
+    }
+
+    fun updateFav(like: Boolean, id: Long){
+        viewModelScope.launch (Dispatchers.IO){
+            repo.updateFav(like,id)
         }
     }
 
@@ -97,18 +119,28 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun signOut() {
+       firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", favList.value)
         firebaseAuth.signOut()
         _user.value = firebaseAuth.currentUser
     }
 
     fun signIn(email: String, password: String) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 setupUserEnv()
+//                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get().addOnSuccessListener {
+//                    var profile = it.toObject(Profile::class.java)
+//                    if (profile?.favList != null){
+//                        for (item in profile!!.favList){
+//                           updateFav(item.isLiked, item.id)
+//                        }
+//                    }
+//                }
             } else {
                 Toast.makeText(getApplication(), "Wrong email or password!", Toast.LENGTH_LONG)
                     .show()
             }
         }
     }
+
 }

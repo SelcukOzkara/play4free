@@ -12,6 +12,6 @@ data class GameDetail (
     val developer: String,
     val release_date: String,
     val minimum_system_requirements: SystemRequire,
-    val screenshots: List<Screenshot>
-
+    val screenshots: List<Screenshot>,
+    var isLiked: Boolean = false
 )

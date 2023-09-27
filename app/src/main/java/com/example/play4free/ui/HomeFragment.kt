@@ -39,7 +39,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadGameList()
+
+       viewModel.loadGameList()
+
+
         binding.homeRV.adapter = gameAdapter
 
         viewModel.gameList.observe(viewLifecycleOwner){

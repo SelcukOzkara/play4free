@@ -11,36 +11,33 @@ import coil.load
 import com.example.play4free.GameViewModel
 import com.example.play4free.R
 import com.example.play4free.data.datamodels.Games
+import com.example.play4free.databinding.FavItemBinding
 import com.example.play4free.databinding.GameListItemBinding
 import com.example.play4free.ui.HomeFragmentDirections
 
-class GameAdapter(
+class FavAdapter(
     private var viewModel : GameViewModel
-): ListAdapter<Games, GameAdapter.ItemViewHolder>(UtilDiffDigimon()) {
+): ListAdapter<Games, FavAdapter.ItemViewHolder>(UtilDiffDigimon()) {
 
-    inner class ItemViewHolder(val binding: GameListItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ItemViewHolder(val binding: FavItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(item: Games){
             with(binding){
-                homeThumbIV.load(item.thumbnail)
-                homeGameTitleTV.text = item.title
-                homeShortDescTV.text = item.short_description
-                homeGenreTV.text = item.genre
-                homePlatformTV.text = item.platform
+               favImgIV.load(item.thumbnail)
+                favTitleTV.text = item.title
 
-                if (item.isLiked) homeLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
-                else homeLikeBTN.setImageResource(R.drawable.unlike)
+                if (item.isLiked) favLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
+                else favLikeBTN.setImageResource(R.drawable.unlike)
 
-                homeLikeBTN.setOnClickListener {
-                        if (!item.isLiked){
-                            viewModel.addFav(item)
-                        }else viewModel.removeFav(item)
-                    Log.d("LikeTest", viewModel.newList.toString())
+                favLikeBTN.setOnClickListener {
+                   if (!item.isLiked){
+                       viewModel.addFav(item)
+                   }else viewModel.removeFav(item)
 
 
-                    viewModel.updateFav(!item.isLiked, item.id)
+//                    viewModel.updateFav(!item.isLiked, item.id)
                 }
 
-                homeCV.setOnClickListener {
+                favCV.setOnClickListener {
                     it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
                 }
             }
@@ -69,7 +66,7 @@ class GameAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        return ItemViewHolder(GameListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ItemViewHolder(FavItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

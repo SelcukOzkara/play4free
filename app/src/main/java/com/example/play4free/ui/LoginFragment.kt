@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.play4free.GameViewModel
@@ -80,7 +81,21 @@ class LoginFragment : Fragment() {
         )
 
         signUpBinding.signUpDateET.setOnClickListener {
-            showDatePicker()
+            val calendar = Calendar.getInstance()
+            val datePickerDialog = DatePickerDialog(
+                requireContext(), { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(year, monthOfYear, dayOfMonth)
+                    val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(selectedDate.time)
+                    signUpBinding.signUpDateET.setText("$formattedDate")
+                    Log.d("DatePicker", formattedDate)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
         }
 
 
@@ -97,16 +112,15 @@ class LoginFragment : Fragment() {
                 signUpBinding.signUpEmailET.error = "Enter a valid email address"
                 return@setOnClickListener
             }
-
-            if (pw.isEmpty() || pw.length < 6) {
+            if (date.isEmpty() || date.split(".").last().toInt() >= 2005) {
+                signUpBinding.signUpDateET.error = "You must be 18 years old!"
+            } else if (pw.isEmpty() || pw.length < 6) {
                 signUpBinding.signUpPwET.error = "Password must be at least 6 characters"
             } else if (pw != pwCon) {
                 signUpBinding.signUpPwSecET.error =
                     "Confirm password has to be the same as password"
             } else {
-
                 viewModel.signUp(email, pw, username, date)
-
 
                 viewModel.status.observe(viewLifecycleOwner) {
                     when (it) {
@@ -115,6 +129,7 @@ class LoginFragment : Fragment() {
                             signUpBinding.signUpEmailET.requestFocus()
                             signUpBinding.signUpEmailET.error = "Email already taken"
                         }
+
                         3 -> Toast.makeText(requireContext(), "SignUp failed!", Toast.LENGTH_LONG)
                             .show()
                     }
@@ -124,7 +139,6 @@ class LoginFragment : Fragment() {
         }
 
         signUpBinding.signUpAbortBTN.setOnClickListener {
-
             dialog.dismiss()
         }
 
@@ -132,29 +146,5 @@ class LoginFragment : Fragment() {
         dialog.show()
     }
 
-    private fun showDatePicker() {
-        val calendar = Calendar.getInstance()
-        val signUpBinding: SignUpBinding = SignUpBinding.inflate(layoutInflater)
-        // Create a DatePickerDialog
-        val datePickerDialog = DatePickerDialog(
-            requireContext(), {DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                // Create a new Calendar instance to hold the selected date
-                val selectedDate = Calendar.getInstance()
-                // Set the selected date using the values received from the DatePicker dialog
-                selectedDate.set(year, monthOfYear, dayOfMonth)
-                // Create a SimpleDateFormat to format the date as "dd/mm/yyyy"
-                val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-                // Format the selected date into a string
-                val formattedDate = dateFormat.format(selectedDate.time)
-                // Update the TextView to display the selected date with the " " prefix
-                signUpBinding.signUpDateET.setText("Selected Date: $formattedDate")
-                Log.d("DatePicker", formattedDate)
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        )
-        datePickerDialog.show()
-    }
 
 }

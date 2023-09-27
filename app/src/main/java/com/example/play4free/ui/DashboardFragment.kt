@@ -9,12 +9,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.play4free.GameViewModel
 import com.example.play4free.R
+import com.example.play4free.adapter.FavAdapter
+import com.example.play4free.adapter.GameAdapter
 import com.example.play4free.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
     val viewModel: GameViewModel by activityViewModels()
+    private val favAdapter: FavAdapter by lazy { FavAdapter(viewModel) }
+
 
 
     override fun onCreateView(
@@ -27,6 +31,12 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.favRV.adapter = favAdapter
+
+        viewModel.favList.observe(viewLifecycleOwner){
+            favAdapter.submitList(it)
+        }
+
         binding.dashboardLogOutBTN.setOnClickListener {
             viewModel.signOut()
             findNavController().popBackStack()

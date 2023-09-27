@@ -43,9 +43,47 @@
         android:id="@+id/dashboardSettingBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_settings_24"
+        android:layout_marginStart="105dp"
+        android:layout_marginBottom="105dp"
         android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/baseline_settings_24"
         app:layout_constraintBottom_toBottomOf="@+id/dashboardPbIV"
-        app:layout_constraintEnd_toEndOf="@+id/dashboardPbIV" />
+        app:layout_constraintEnd_toEndOf="@+id/dashboardPbIV"
+        app:layout_constraintStart_toStartOf="@+id/dashboardPbIV"
+        app:layout_constraintTop_toTopOf="@+id/dashboardPbIV" />
+
+    <TextView
+        android:id="@+id/dashboardMailTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardUsernameTV"
+        app:layout_constraintStart_toStartOf="@+id/dashboardUsernameTV"
+        app:layout_constraintTop_toBottomOf="@+id/dashboardUsernameTV" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboardFavTV"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/fav_item"/>
+
+    <TextView
+        android:id="@+id/dashboardFavTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Favourites"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboardMailTV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

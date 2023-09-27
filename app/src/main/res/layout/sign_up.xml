@@ -68,14 +68,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/signUpEmailLayout"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="Date">
+                android:hint="Birthdate">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signUpDateET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/calendar"
-                android:inputType="date" />
+                android:inputType="date"
+                android:focusableInTouchMode="false"
+                />
             </com.google.android.material.textfield.TextInputLayout>
 
 

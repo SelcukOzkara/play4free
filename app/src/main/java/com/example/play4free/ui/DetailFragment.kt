@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.play4free.GameViewModel
+import com.example.play4free.R
 import com.example.play4free.databinding.FragmentDetailBinding
 
 
@@ -31,6 +32,7 @@ class DetailFragment : Fragment() {
         viewModel.getGameDetail(requireArguments().getLong("id"))
 
         viewModel.gameDetail.observe(viewLifecycleOwner) {
+            var currentGame = it
             with(binding) {
                 detailThumbIV.load(it.thumbnail)
                 detailTitleTV.text = it.title
@@ -46,6 +48,15 @@ class DetailFragment : Fragment() {
                 detailScreen4IV.load(it.screenshots[3].image)
 
                 detailDescTV.setInterpolator(OvershootInterpolator())
+
+                if (it.isLiked) detailLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
+                else detailLikeBTN.setImageResource(R.drawable.unlike)
+
+                detailLikeBTN.setOnClickListener {
+                    viewModel.updateFav(!currentGame.isLiked, currentGame.id)
+                }
+
+                it.isLiked = currentGame.isLiked
 
                 detailReadMoreTV.setOnClickListener {
                         detailDescTV.toggle()
