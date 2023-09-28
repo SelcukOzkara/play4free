@@ -1,6 +1,5 @@
 package com.example.play4free.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,7 @@ import com.example.play4free.GameViewModel
 import com.example.play4free.R
 import com.example.play4free.data.datamodels.Games
 import com.example.play4free.databinding.FavItemBinding
-import com.example.play4free.databinding.GameListItemBinding
 import com.example.play4free.ui.DashboardFragmentDirections
-import com.example.play4free.ui.HomeFragmentDirections
 
 class FavAdapter(
     private var viewModel : GameViewModel

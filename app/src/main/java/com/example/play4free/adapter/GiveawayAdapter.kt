@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.play4free.GameViewModel
 import com.example.play4free.data.datamodels.Giveaways
-import com.example.play4free.databinding.FragmentGiveawayBinding
 import com.example.play4free.databinding.GiveawayItemBinding
 
 

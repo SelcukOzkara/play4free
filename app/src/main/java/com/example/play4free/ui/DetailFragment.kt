@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.play4free.GameViewModel
-import com.example.play4free.R
 import com.example.play4free.databinding.FragmentDetailBinding
 
 
