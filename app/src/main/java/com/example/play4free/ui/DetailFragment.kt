@@ -49,14 +49,6 @@ class DetailFragment : Fragment() {
 
                 detailDescTV.setInterpolator(OvershootInterpolator())
 
-                if (it.isLiked) detailLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
-                else detailLikeBTN.setImageResource(R.drawable.unlike)
-
-                detailLikeBTN.setOnClickListener {
-                    viewModel.updateFav(!currentGame.isLiked, currentGame.id)
-                }
-
-                it.isLiked = currentGame.isLiked
 
                 detailReadMoreTV.setOnClickListener {
                         detailDescTV.toggle()

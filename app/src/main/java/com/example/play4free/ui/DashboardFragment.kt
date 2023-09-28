@@ -33,8 +33,8 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.favRV.adapter = favAdapter
 
-        viewModel.favList.observe(viewLifecycleOwner){
-            favAdapter.submitList(it)
+        viewModel.gameList.observe(viewLifecycleOwner){
+            favAdapter.submitList(it.filter { it.isLiked })
         }
 
         binding.dashboardLogOutBTN.setOnClickListener {

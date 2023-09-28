@@ -21,7 +21,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,7 +37,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val gameList = repo.gameList
     val favList = repo.favList
     val giveawayList = repo.giveawayList
-    val newList = mutableListOf<Games>()
+    val listOfId = mutableListOf<Long>()
 
 
     private val _gameDetail: MutableLiveData<GameDetail> = MutableLiveData()
@@ -119,8 +121,15 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun signOut() {
-       firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", favList.value)
+
+
+        if (listOfId != null){
+            for (item in listOfId){
+                updateFav(false, item)
+            }
+        }
         firebaseAuth.signOut()
+        listOfId.clear()
         _user.value = firebaseAuth.currentUser
     }
 
@@ -128,14 +137,16 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 setupUserEnv()
-//                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get().addOnSuccessListener {
-//                    var profile = it.toObject(Profile::class.java)
-//                    if (profile?.favList != null){
-//                        for (item in profile!!.favList){
-//                           updateFav(item.isLiked, item.id)
-//                        }
-//                    }
-//                }
+
+                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get().addOnSuccessListener {
+                    var profile = it.toObject(Profile::class.java)
+                    if (profile?.favList != null){
+                        for (item in profile!!.favList){
+                            addLikedItem(item)
+                            updateFav(true, item)
+                        }
+                    }
+                }
             } else {
                 Toast.makeText(getApplication(), "Wrong email or password!", Toast.LENGTH_LONG)
                     .show()
@@ -143,4 +154,13 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun addLikedItem(id: Long){
+        listOfId.add(id)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", listOfId)
+    }
+
+    fun removeLikedItem(id: Long){
+        listOfId.remove(id)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", listOfId)
+    }
 }

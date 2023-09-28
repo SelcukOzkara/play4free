@@ -2,6 +2,7 @@ package com.example.play4free.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -13,6 +14,7 @@ import com.example.play4free.R
 import com.example.play4free.data.datamodels.Games
 import com.example.play4free.databinding.FavItemBinding
 import com.example.play4free.databinding.GameListItemBinding
+import com.example.play4free.ui.DashboardFragmentDirections
 import com.example.play4free.ui.HomeFragmentDirections
 
 class FavAdapter(
@@ -24,21 +26,23 @@ class FavAdapter(
             with(binding){
                favImgIV.load(item.thumbnail)
                 favTitleTV.text = item.title
+                if (viewModel.user.value != null ){
+                    favLikeBTN.visibility = View.VISIBLE
+                    if (item.isLiked) favLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
+                    else favLikeBTN.setImageResource(R.drawable.unlike)
 
-                if (item.isLiked) favLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
-                else favLikeBTN.setImageResource(R.drawable.unlike)
+                    favLikeBTN.setOnClickListener {
+                        if (item.isLiked){
+                            viewModel.removeLikedItem(item.id)
+                        }else  viewModel.addLikedItem(item.id)
 
-                favLikeBTN.setOnClickListener {
-                   if (!item.isLiked){
-                       viewModel.addFav(item)
-                   }else viewModel.removeFav(item)
+                        viewModel.updateFav(!item.isLiked, item.id)
+                    }
+                } else  favLikeBTN.visibility = View.INVISIBLE
 
-
-//                    viewModel.updateFav(!item.isLiked, item.id)
-                }
 
                 favCV.setOnClickListener {
-                    it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
+                    it.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToDetailFragment(item.id))
                 }
             }
         }

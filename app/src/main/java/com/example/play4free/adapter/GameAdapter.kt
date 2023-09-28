@@ -2,6 +2,7 @@ package com.example.play4free.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -27,18 +28,19 @@ class GameAdapter(
                 homeGenreTV.text = item.genre
                 homePlatformTV.text = item.platform
 
+                if (viewModel.user.value != null ){
+                    homeLikeBTN.visibility = View.VISIBLE
                 if (item.isLiked) homeLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
                 else homeLikeBTN.setImageResource(R.drawable.unlike)
 
                 homeLikeBTN.setOnClickListener {
                         if (!item.isLiked){
-                            viewModel.addFav(item)
-                        }else viewModel.removeFav(item)
-                    Log.d("LikeTest", viewModel.newList.toString())
-
+                            viewModel.addLikedItem(item.id)
+                        }else viewModel.removeLikedItem(item.id)
 
                     viewModel.updateFav(!item.isLiked, item.id)
                 }
+                } else  homeLikeBTN.visibility = View.INVISIBLE
 
                 homeCV.setOnClickListener {
                     it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))

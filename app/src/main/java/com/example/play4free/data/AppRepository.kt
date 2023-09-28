@@ -32,7 +32,7 @@ class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayA
     suspend fun getGameList(){
         try {
             val gameList = api.retrofitService.getGamesList()
-            database.gameDao.insertGameList(gameList)
+            if (database.gameDao.getCount() == 0) database.gameDao.insertGameList(gameList)
         }catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }

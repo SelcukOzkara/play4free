@@ -227,16 +227,5 @@
             app:layout_constraintStart_toEndOf="@+id/detailScreen3IV"
             app:layout_constraintTop_toTopOf="@+id/detailScreen3IV" />
 
-        <ImageButton
-            android:id="@+id/detailLikeBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/unlike"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@android:color/transparent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -4,5 +4,5 @@ data class Profile (
     val pb: String = "" ,
     val username: String = "",
     val date: String = "",
-    var favList: List<Games> = listOf()
+    var favList: List<Long> = listOf()
 )
