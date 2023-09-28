@@ -35,7 +35,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var database = getData(application)
     private val repo = AppRepository(GamesApi, GiveawayApi, database)
     val gameList = repo.gameList
-    val favList = repo.favList
     val giveawayList = repo.giveawayList
     val listOfId = mutableListOf<Long>()
 
@@ -58,17 +57,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         setupUserEnv()
     }
 
-    fun addFav(newFav : Games){
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.addFav(newFav)
-        }
-    }
-
-    fun removeFav(remFav: Games){
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.remFav(remFav)
-        }
-    }
 
 
     fun loadGameList() {
