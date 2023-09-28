@@ -14,7 +14,6 @@ const val TAG = "AppRepo"
 
 class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayApi, private val database: GameDatabase) {
 
-    var newFavList = mutableListOf<Games>()
 
     private val _gameList = database.gameDao.getAllGames()
     val gameList: LiveData<List<Games>>
@@ -47,15 +46,7 @@ class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayA
         }
     }
 
-    fun addFav(newGame: Games){
-        newFavList.add(newGame)
-        _favList.postValue(newFavList)
-    }
 
-    fun remFav(oldGame: Games){
-        newFavList.remove(oldGame)
-        _favList.postValue(newFavList)
-    }
     suspend fun getGiveaway(){
         try {
             val giveawayList = giveawayApi.retrofitService.getGiveawayList()
