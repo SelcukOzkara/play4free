@@ -23,9 +23,6 @@ interface GameDao {
     @Query("UPDATE games_table SET isLiked = :liked WHERE id = :id")
     fun updateFav(liked: Boolean, id: Long)
 
-//    @Query("SELECT * FROM games_table WHERE isLiked = 1")
-//    fun getAllFav():LiveData<List<Games>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGiveawayList(giveawayList: List<Giveaways>)
 

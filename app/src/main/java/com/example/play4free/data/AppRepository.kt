@@ -19,10 +19,6 @@ class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayA
     val gameList: LiveData<List<Games>>
         get() = _gameList
 
-    private val _favList = MutableLiveData<List<Games>>()
-    val favList: LiveData<List<Games>>
-        get() = _favList
-
     private val _giveawayList = database.gameDao.getGiveaways()
     val giveawayList: LiveData<List<Giveaways>>
         get() = _giveawayList
