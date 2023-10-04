@@ -1,6 +1,7 @@
 package com.example.play4free
 
 import android.app.Application
+import android.net.Uri
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -17,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -24,6 +28,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
+    val storage = Firebase.storage.reference
     private var database = getData(application)
     private val repo = AppRepository(GamesApi, GiveawayApi, database)
     val gameList = repo.gameList
@@ -39,6 +44,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val user: LiveData<FirebaseUser?>
         get() = _user
 
+    private var _currentUserProfile: MutableLiveData<Profile> = MutableLiveData()
+    val currentUserProfile: LiveData<Profile>
+        get() = _currentUserProfile
+
     private val _status: MutableLiveData<Int> = MutableLiveData()
     val status: LiveData<Int>
         get() = _status
@@ -48,8 +57,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     init {
         setupUserEnv()
     }
-
-
 
     fun loadGameList() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -80,6 +87,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         firebaseAuth.currentUser?.let {
             profileRef = firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
         }
+
+        if (_user.value != null){
+            profileRef.get().addOnSuccessListener {
+                _currentUserProfile.value = it.toObject(Profile::class.java)
+            }
+        }
     }
 
     fun signUp(email: String, password: String, username: String, date: String) {
@@ -101,8 +114,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun signOut() {
-
-
         if (listOfId != null){
             for (item in listOfId){
                 updateFav(false, item)
@@ -117,7 +128,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 setupUserEnv()
-
                 firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get().addOnSuccessListener {
                     var profile = it.toObject(Profile::class.java)
                     if (profile?.favList != null){
@@ -134,6 +144,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun resetPw(){
+        firebaseAuth.sendPasswordResetEmail(_user.value?.email!!)
+    }
+
     fun addLikedItem(id: Long){
         listOfId.add(id)
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", listOfId)
@@ -142,5 +156,32 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun removeLikedItem(id: Long){
         listOfId.remove(id)
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", listOfId)
+    }
+
+    fun uploadImage(uri: Uri){
+        try {
+            val postId = generateImageId()
+            val imageFileName = "$postId.jpg"
+            val imageReference = storage.child("images/${user.value?.uid}/$imageFileName")
+            val imageRef = imageReference.child(imageFileName)
+            val uploadTask = imageRef.putFile(uri)
+
+            uploadTask.addOnCompleteListener {
+                if (it.isSuccessful){
+                    imageRef.downloadUrl.addOnCompleteListener {
+                        if (it.isSuccessful){
+                            val imageUrl = it.result.toString()
+                            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("pb", imageUrl)
+                        }
+                    }
+                }
+            }
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun generateImageId(): String {
+        return System.currentTimeMillis().toString()
     }
 }

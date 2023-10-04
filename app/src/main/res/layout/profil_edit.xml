@@ -14,43 +14,88 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="24dp">
+            android:layout_height="match_parent" >
 
-            <Button
-                android:id="@+id/saveBTN"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:text="Save"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/signUpPwSecLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:endIconMode = "clear_text"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="Username"
-                android:layout_marginBottom="26dp"
-                app:layout_constraintBottom_toTopOf="@+id/saveBTN"
-                app:layout_constraintEnd_toEndOf="@+id/saveBTN"
-                app:layout_constraintStart_toStartOf="@+id/saveBTN">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextText"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Name" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:padding="24dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/editPbIV"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/editPbBTN"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Upload new picture"
+                    app:layout_constraintBottom_toTopOf="@+id/saveBTN"
+                    app:layout_constraintEnd_toEndOf="@+id/saveBTN"
+                    app:layout_constraintStart_toStartOf="@+id/saveBTN" />
+
+                <Button
+                    android:id="@+id/saveBTN"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    app:layout_constraintBottom_toTopOf="@+id/editPwBTN"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/editPwBTN"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Change Password"
+                    app:layout_constraintEnd_toEndOf="@+id/saveBTN"
+                    app:layout_constraintStart_toStartOf="@+id/saveBTN"
+                    app:layout_constraintTop_toBottomOf="@+id/saveBTN" />
+
+                <Button
+                    android:id="@+id/cancleBTN"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Button"
+                    app:layout_constraintEnd_toEndOf="@+id/editPwBTN"
+                    app:layout_constraintStart_toStartOf="@+id/editPwBTN"
+                    app:layout_constraintTop_toBottomOf="@+id/editPwBTN" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signUpPwSecLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="26dp"
+                    android:ems="10"
+                    android:hint="Username"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintBottom_toTopOf="@+id/editPbBTN"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editPbIV">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/usernameET"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:text="Name" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
