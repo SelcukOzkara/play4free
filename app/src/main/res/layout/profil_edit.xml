@@ -72,7 +72,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/editPwBTN" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signUpPwSecLayout"
+                    android:id="@+id/pwReset"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"

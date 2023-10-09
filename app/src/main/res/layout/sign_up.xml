@@ -105,7 +105,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signUpPwSecLayout"
+                    android:id="@+id/pwReset"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -129,9 +129,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="Create Account"
-                    app:layout_constraintEnd_toEndOf="@+id/signUpPwSecLayout"
-                    app:layout_constraintStart_toStartOf="@+id/signUpPwSecLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/signUpPwSecLayout" />
+                    app:layout_constraintEnd_toEndOf="@+id/pwReset"
+                    app:layout_constraintStart_toStartOf="@+id/pwReset"
+                    app:layout_constraintTop_toBottomOf="@+id/pwReset" />
 
                 <Button
                     android:id="@+id/signUpAbortBTN"

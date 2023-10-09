@@ -17,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.play4free.GameViewModel
 import com.example.play4free.databinding.FragmentLoginBinding
+import com.example.play4free.databinding.ResetPwBinding
 import com.example.play4free.databinding.SignUpBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -42,6 +43,10 @@ class LoginFragment : Fragment() {
 
         binding.loginSignUpBTN.setOnClickListener {
             showDialog()
+        }
+
+        binding.loginPwResetTV.setOnClickListener {
+            showResetDialog()
         }
 
         binding.loginSignInBTN.setOnClickListener {
@@ -136,6 +141,38 @@ class LoginFragment : Fragment() {
 
         signUpBinding.signUpAbortBTN.setOnClickListener {
             dialog.dismiss()
+        }
+
+
+        dialog.show()
+    }
+
+    private fun showResetDialog() {
+        val resetBinding: ResetPwBinding = ResetPwBinding.inflate(layoutInflater)
+        val dialog = Dialog(requireContext())
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        dialog.setCancelable(false)
+        dialog.setContentView(resetBinding.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setLayout(
+            (WindowManager.LayoutParams.MATCH_PARENT),
+            (WindowManager.LayoutParams.MATCH_PARENT)
+        )
+
+
+        resetBinding.resetBTN.setOnClickListener {
+            var email = resetBinding.emailResetET.text.toString()
+
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()) {
+                resetBinding.emailResetET.requestFocus()
+                resetBinding.emailResetET.error = "Enter a valid email address"
+                return@setOnClickListener
+            } else {
+                viewModel.resetPw(email)
+                Toast.makeText(requireContext(),"Reset email was send",Toast.LENGTH_LONG).show()
+                dialog.dismiss()
+            }
         }
 
 

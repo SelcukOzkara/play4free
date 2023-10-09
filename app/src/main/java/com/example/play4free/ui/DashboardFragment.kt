@@ -65,23 +65,29 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.favRV.adapter = favAdapter
 
-        val username = viewModel.currentUserProfile.value?.username
-        val date = viewModel.currentUserProfile.value?.date
-        val pb = viewModel.currentUserProfile.value?.pb
+        var username : String?
+        var date : String?
+        var pb : String?
 
-        binding.dashboardUsernameTV.text = username
-        binding.dashboardMailTV.text = date
-        binding.dashboardPbIV.load(pb)
 
-        if (!pb.isNullOrEmpty()) {
-            binding.dashboardPbIV.load(pb){
-                crossfade(true)
-                placeholder(R.drawable.baseline_account_box_24)
-                error(R.drawable.baseline_error_outline_24)
-                transformations(RoundedCornersTransformation(40f))
+        viewModel.user.observe(viewLifecycleOwner) {
+            username = viewModel.currentUserProfile.value?.username
+            date = viewModel.currentUserProfile.value?.date
+            pb = viewModel.currentUserProfile.value?.pb
+            binding.dashboardUsernameTV.text = username
+            binding.dashboardMailTV.text = date
+            binding.dashboardPbIV.load(pb)
+
+            if (!pb.isNullOrEmpty()) {
+                binding.dashboardPbIV.load(pb) {
+                    crossfade(true)
+                    placeholder(R.drawable.baseline_account_box_24)
+                    error(R.drawable.baseline_error_outline_24)
+                    transformations(RoundedCornersTransformation(40f))
+                }
+            } else {
+                binding.dashboardPbIV.setImageResource(R.drawable.baseline_account_box_24)
             }
-        } else {
-            binding.dashboardPbIV.setImageResource(R.drawable.baseline_account_box_24)
         }
 
         viewModel.gameList.observe(viewLifecycleOwner){
@@ -116,14 +122,13 @@ class DashboardFragment : Fragment() {
 
         binding.saveBTN.setOnClickListener {
                 val updatedUsername = binding.usernameET.text.toString()
+                 val updatedPb = binding.editPbIV.toString()
+            Log.d("TestBild", updatedPb)
 
                 try {
                     viewModel.profileRef.update(
                         "username",
                         updatedUsername,
-                        "pb",
-
-
                     ).addOnSuccessListener {
                         dialog.dismiss()
                     }
@@ -143,7 +148,7 @@ class DashboardFragment : Fragment() {
         }
 
         binding.editPwBTN.setOnClickListener {
-            viewModel.resetPw()
+            viewModel.resetPw(viewModel.user.value?.email!!)
             Toast.makeText(requireContext(),"Reset email was send",Toast.LENGTH_LONG).show()
         }
 

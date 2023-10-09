@@ -144,8 +144,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun resetPw(){
-        firebaseAuth.sendPasswordResetEmail(_user.value?.email!!)
+    fun resetPw(email: String){
+        if (_user.value != null){
+            firebaseAuth.sendPasswordResetEmail(_user.value?.email!!)
+        } else{
+            firebaseAuth.sendPasswordResetEmail(email)
+        }
     }
 
     fun addLikedItem(id: Long){
