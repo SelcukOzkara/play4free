@@ -42,9 +42,7 @@ class DashboardFragment : Fragment() {
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 data?.data?.let { uri ->
-                    var dialogBinding: ProfilEditBinding = ProfilEditBinding.inflate(layoutInflater)
                     binding.dashboardPbIV.setImageURI(uri)
-                    dialogBinding.editPbIV.setImageURI(uri)
                     binding.dashboardPbIV.visibility = View.VISIBLE
                     viewModel.uploadImage(uri)
                 }
@@ -52,12 +50,11 @@ class DashboardFragment : Fragment() {
         }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDashboardBinding.inflate(inflater,container,false)
+        binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -65,18 +62,17 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.favRV.adapter = favAdapter
 
-        var username : String?
-        var date : String?
-        var pb : String?
+        var username: String?
+        var date: String?
+        var pb: String?
 
 
-        viewModel.user.observe(viewLifecycleOwner) {
+        viewModel.currentUserProfile.observe(viewLifecycleOwner) {
             username = viewModel.currentUserProfile.value?.username
             date = viewModel.currentUserProfile.value?.date
             pb = viewModel.currentUserProfile.value?.pb
             binding.dashboardUsernameTV.text = username
             binding.dashboardMailTV.text = date
-            binding.dashboardPbIV.load(pb)
 
             if (!pb.isNullOrEmpty()) {
                 binding.dashboardPbIV.load(pb) {
@@ -90,12 +86,12 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        viewModel.gameList.observe(viewLifecycleOwner){
+        viewModel.gameList.observe(viewLifecycleOwner) {
             favAdapter.submitList(it.filter { it.isLiked })
         }
 
 
-        binding.dashboardSettingBTN.setOnClickListener{
+        binding.dashboardSettingBTN.setOnClickListener {
             showDialog()
         }
 
@@ -118,27 +114,24 @@ class DashboardFragment : Fragment() {
         )
 
         binding.usernameET.setText(viewModel.currentUserProfile.value?.username)
-        binding.editPbIV.load(viewModel.currentUserProfile.value?.pb)
 
         binding.saveBTN.setOnClickListener {
-                val updatedUsername = binding.usernameET.text.toString()
-                 val updatedPb = binding.editPbIV.toString()
-            Log.d("TestBild", updatedPb)
+            val updatedUsername = binding.usernameET.text.toString()
 
-                try {
-                    viewModel.profileRef.update(
-                        "username",
-                        updatedUsername,
-                    ).addOnSuccessListener {
-                        dialog.dismiss()
-                    }
-                        .addOnFailureListener { e ->
-                            e.printStackTrace()
-                        }
-                } catch (e: Exception) {
-                    e.printStackTrace()
+            try {
+                viewModel.profileRef.update(
+                    "username",
+                    updatedUsername,
+                )?.addOnSuccessListener {
+                    viewModel.setupUserEnv()
+                    dialog.dismiss()
                 }
-
+                    ?.addOnFailureListener { e ->
+                        e.printStackTrace()
+                    }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         binding.editPbBTN.setOnClickListener {
@@ -149,7 +142,7 @@ class DashboardFragment : Fragment() {
 
         binding.editPwBTN.setOnClickListener {
             viewModel.resetPw(viewModel.user.value?.email!!)
-            Toast.makeText(requireContext(),"Reset email was send",Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Reset email was send", Toast.LENGTH_LONG).show()
         }
 
         binding.cancleBTN.setOnClickListener {

@@ -31,20 +31,24 @@ class DetailFragment : Fragment() {
         viewModel.getGameDetail(requireArguments().getLong("id"))
 
         viewModel.gameDetail.observe(viewLifecycleOwner) {
-            var currentGame = it
             with(binding) {
                 detailThumbIV.load(it.thumbnail)
                 detailTitleTV.text = it.title
                 detailDescTV.text = it.description
-                detailOsTV.text = it.minimum_system_requirements.os
-                detailCpuTV.text = it.minimum_system_requirements.processor
-                detailRamTV.text = it.minimum_system_requirements.memory
-                detailGpuTV.text = it.minimum_system_requirements.graphics
-                detailStorageTV.text = it.minimum_system_requirements.storage
-                detailScreen1IV.load(it.screenshots[0].image)
-                detailScreen2IV.load(it.screenshots[1].image)
-                detailScreen3IV.load(it.screenshots[2].image)
-                detailScreen4IV.load(it.screenshots[3].image)
+                detailOsTV.text = it.minimum_system_requirements?.os ?: "n/a"
+                detailCpuTV.text = it.minimum_system_requirements?.processor ?: "n/a"
+                detailRamTV.text = it.minimum_system_requirements?.memory ?: "n/a"
+                detailGpuTV.text = it.minimum_system_requirements?.graphics ?: "n/a"
+                detailStorageTV.text = it.minimum_system_requirements?.storage ?: "n/a"
+                try {
+                    detailScreen1IV.load(it.screenshots[0].image)
+                    detailScreen2IV.load(it.screenshots[1].image)
+                    detailScreen3IV.load(it.screenshots[2].image)
+                    detailScreen4IV.load(it.screenshots[3].image)
+                }catch (e:Exception){
+
+                }
+
 
                 detailDescTV.setInterpolator(OvershootInterpolator())
 

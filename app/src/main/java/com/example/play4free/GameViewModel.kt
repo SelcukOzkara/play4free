@@ -13,6 +13,7 @@ import com.example.play4free.data.datamodels.Profile
 import com.example.play4free.data.local.getData
 import com.example.play4free.data.remote.GamesApi
 import com.example.play4free.data.remote.GiveawayApi
+import com.example.play4free.databinding.FragmentDashboardBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
@@ -141,6 +142,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 Toast.makeText(getApplication(), "Wrong email or password!", Toast.LENGTH_LONG)
                     .show()
             }
+        }.addOnSuccessListener {
+
         }
     }
 
@@ -176,6 +179,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                         if (it.isSuccessful){
                             val imageUrl = it.result.toString()
                             firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("pb", imageUrl)
+                            setupUserEnv()
                         }
                     }
                 }
