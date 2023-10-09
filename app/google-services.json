@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554063632964",
+    "project_id": "play4free-c33ea",
+    "storage_bucket": "play4free-c33ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554063632964:android:9de0babbdd22d3c6647a11",
+        "android_client_info": {
+          "package_name": "com.example.play4free"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf4VflE9CLWq4RXiTFNWSLbdTBtPMUVRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
