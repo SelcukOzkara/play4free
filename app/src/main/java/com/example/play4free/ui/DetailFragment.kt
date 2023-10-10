@@ -1,5 +1,7 @@
 package com.example.play4free.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +51,16 @@ class DetailFragment : Fragment() {
 
                 }
 
+                detailShareBTN.setOnClickListener {
+                    share(viewModel.gameDetail.value!!.game_url)
+                }
+
+                detailPlayNowBTN.setOnClickListener {
+                    val playNow = Intent(Intent.ACTION_VIEW)
+                    playNow.data = Uri.parse(viewModel.gameDetail.value!!.game_url)
+                    startActivity(playNow)
+                }
+
 
                 detailDescTV.setInterpolator(OvershootInterpolator())
 
@@ -58,7 +70,16 @@ class DetailFragment : Fragment() {
                         if (!detailDescTV.isExpanded) detailReadMoreTV.text = "read less"
                         else detailReadMoreTV.text = "read more"
                 }
+
+
             }
         }
+    }
+
+    fun share(textToShare: String) {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_TEXT, textToShare)
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
     }
 }
