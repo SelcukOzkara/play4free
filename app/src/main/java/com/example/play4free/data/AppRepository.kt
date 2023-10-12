@@ -12,7 +12,11 @@ import com.example.play4free.data.remote.GiveawayApi
 
 const val TAG = "AppRepo"
 
-class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayApi, private val database: GameDatabase) {
+class AppRepository(
+    private val api: GamesApi,
+    private val giveawayApi: GiveawayApi,
+    private val database: GameDatabase
+) {
 
 
     private val _gameList: LiveData<List<Games>> = database.gameDao.getAllGames()
@@ -24,36 +28,44 @@ class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayA
     val giveawayList: LiveData<List<Giveaways>>
         get() = _giveawayList
 
+    private val _searchResult: MutableLiveData<List<Games>> = MutableLiveData()
+    val searchtResult: LiveData<List<Games>>
+        get() = _searchResult
 
-    suspend fun getGameList(){
+    suspend fun getGameList() {
         try {
             val gameList = api.retrofitService.getGamesList()
             if (database.gameDao.getCount() == 0) database.gameDao.insertGameList(gameList)
             Log.d("NewTest", _gameList.value.toString())
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }
     }
 
-    suspend fun getFilterBy(genre: String){
-
+    suspend fun search(search: String) {
+        try {
+            _searchResult.postValue(database.gameDao.search(search))
+            Log.d("ResultTest", _searchResult.value.toString())
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading from Search: $e")
+        }
     }
 
-    suspend fun getGameDetail(id: Long): GameDetail?{
+    suspend fun getGameDetail(id: Long): GameDetail? {
         try {
             return api.retrofitService.getGameDetail(id)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
             return null
         }
     }
 
 
-    suspend fun getGiveaway(){
+    suspend fun getGiveaway() {
         try {
             val giveawayList = giveawayApi.retrofitService.getGiveawayList()
             database.gameDao.insertGiveawayList(giveawayList)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }
     }

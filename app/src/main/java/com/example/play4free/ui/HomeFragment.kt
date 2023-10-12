@@ -1,11 +1,13 @@
 package com.example.play4free.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.play4free.GameViewModel
@@ -33,6 +35,30 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getGameList()
+
+
+        binding.homeSV.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(p0: String?): Boolean {
+                if (p0 != null) {
+                    viewModel.search(p0)
+                }
+
+                if (p0 == null || p0 == "" ){
+                    gameAdapter.submitList(viewModel.gameList.value)
+                } else gameAdapter.submitList(viewModel.searchResult.value)
+                Log.d("SearchViewTest", viewModel.searchResult.value.toString())
+                return true
+            }
+        })
+
+
+        viewModel.searchResult.observe(viewLifecycleOwner){
+            Log.d("ObserverTest", it.toString())
+        }
+
 
         val spinner = binding.homeFilterSPN
         ArrayAdapter.createFromResource(

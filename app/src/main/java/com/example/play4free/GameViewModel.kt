@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.play4free.data.AppRepository
 import com.example.play4free.data.datamodels.GameDetail
+import com.example.play4free.data.datamodels.Games
 import com.example.play4free.data.datamodels.Profile
 import com.example.play4free.data.local.getData
 import com.example.play4free.data.remote.GamesApi
@@ -34,6 +35,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val repo = AppRepository(GamesApi, GiveawayApi, database)
     val gameList = repo.gameList
     val giveawayList = repo.giveawayList
+    val searchResult = repo.searchtResult
     val listOfId = mutableListOf<Long>()
 
 
@@ -65,6 +67,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun search(search: String){
+        viewModelScope.launch (Dispatchers.IO) {
+            repo.search(search)
+        }
+    }
 
     fun updateFav(like: Boolean, id: Long){
         viewModelScope.launch (Dispatchers.IO){

@@ -18,6 +18,9 @@ interface GameDao {
     @Query("SELECT * FROM games_table")
     fun getAllGames(): LiveData<List<Games>>
 
+    @Query("SELECT * FROM games_table WHERE title LIKE '%'||:search||'%'")
+    fun search(search: String ): List<Games>
+
     @Query("SELECT COUNT (*) FROM games_table")
     fun getCount():Int
 
