@@ -55,11 +55,6 @@ class HomeFragment : Fragment() {
         })
 
 
-        viewModel.searchResult.observe(viewLifecycleOwner){
-            Log.d("ObserverTest", it.toString())
-        }
-
-
         val spinner = binding.homeFilterSPN
         ArrayAdapter.createFromResource(
             requireContext(),
