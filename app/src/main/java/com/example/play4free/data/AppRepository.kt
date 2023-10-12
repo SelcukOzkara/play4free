@@ -15,7 +15,8 @@ const val TAG = "AppRepo"
 class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayApi, private val database: GameDatabase) {
 
 
-    private val _gameList = database.gameDao.getAllGames()
+    private val _gameList: LiveData<List<Games>> = database.gameDao.getAllGames()
+
     val gameList: LiveData<List<Games>>
         get() = _gameList
 
@@ -28,9 +29,14 @@ class AppRepository(private val api: GamesApi,private val giveawayApi: GiveawayA
         try {
             val gameList = api.retrofitService.getGamesList()
             if (database.gameDao.getCount() == 0) database.gameDao.insertGameList(gameList)
+            Log.d("NewTest", _gameList.value.toString())
         }catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }
+    }
+
+    suspend fun getFilterBy(genre: String){
+
     }
 
     suspend fun getGameDetail(id: Long): GameDetail?{

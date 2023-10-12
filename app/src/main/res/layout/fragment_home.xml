@@ -10,10 +10,53 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeFilterSPN"
         tools:listitem="@layout/game_list_item" />
+
+    <SearchView
+        android:id="@+id/homeSV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:queryHint="Search"
+        app:layout_constraintEnd_toStartOf="@+id/homeFilterBTN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/homeFilterTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Filter by:"
+
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/homeSV"
+        app:layout_constraintTop_toBottomOf="@+id/homeSV" />
+
+    <ImageButton
+        android:id="@+id/homeFilterBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_filter_alt_24"
+        app:layout_constraintBottom_toBottomOf="@+id/homeSV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/homeSV" />
+
+    <Spinner
+        android:id="@+id/homeFilterSPN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/homeFilterTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/homeFilterTV"
+        app:layout_constraintTop_toTopOf="@+id/homeFilterTV" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

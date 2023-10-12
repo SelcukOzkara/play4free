@@ -59,11 +59,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         setupUserEnv()
     }
 
-    fun loadGameList() {
+    fun getGameList() {
         viewModelScope.launch(Dispatchers.IO) {
             repo.getGameList()
         }
     }
+
 
     fun updateFav(like: Boolean, id: Long){
         viewModelScope.launch (Dispatchers.IO){

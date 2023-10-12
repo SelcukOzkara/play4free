@@ -2,4 +2,16 @@
     <string name="app_name">Play4Free</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="filter_spinner">
+        <item>All Genre</item>
+        <item>Card Game</item>
+        <item>Fighting</item>
+        <item>MMORPG</item>
+        <item>MMO</item>
+        <item>MOBA</item>
+        <item>Shooter</item>
+        <item>Social</item>
+        <item>Strategy</item>
+    </string-array>
 </resources>
