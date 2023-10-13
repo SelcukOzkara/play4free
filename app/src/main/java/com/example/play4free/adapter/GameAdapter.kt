@@ -19,7 +19,7 @@ class GameAdapter(
     private var viewModel: GameViewModel
 ) : ListAdapter<Games, GameAdapter.ItemViewHolder>(UtilDiffDigimon()) {
 
-    inner class ItemViewHolder(val binding: GameListItemBinding) :
+    inner class ItemViewHolder(private val binding: GameListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Games) {
             with(binding) {

@@ -19,7 +19,7 @@ class FavAdapter(
     private var viewModel : GameViewModel
 ): ListAdapter<Games, FavAdapter.ItemViewHolder>(UtilDiffDigimon()) {
 
-    inner class ItemViewHolder(val binding: FavItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ItemViewHolder(private val binding: FavItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(item: Games){
             with(binding){
                favImgIV.load(item.thumbnail)

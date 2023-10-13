@@ -9,34 +9,32 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.play4free.data.AppRepository
 import com.example.play4free.data.datamodels.GameDetail
-import com.example.play4free.data.datamodels.Games
 import com.example.play4free.data.datamodels.Profile
 import com.example.play4free.data.local.getData
 import com.example.play4free.data.remote.GamesApi
 import com.example.play4free.data.remote.GiveawayApi
-import com.example.play4free.databinding.FragmentDashboardBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
-    val firebaseAuth = FirebaseAuth.getInstance()
-    val firestore = FirebaseFirestore.getInstance()
-    val storage = Firebase.storage.reference
+    private val firebaseAuth = FirebaseAuth.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
+    private val storage = Firebase.storage.reference
     private var database = getData(application)
     private val repo = AppRepository(GamesApi, GiveawayApi, database)
+    private val listOfId = mutableListOf<Long>()
     val gameList = repo.gameList
     val giveawayList = repo.giveawayList
     val searchResult = repo.searchtResult
-    val listOfId = mutableListOf<Long>()
+
 
 
     private val _gameDetail: MutableLiveData<GameDetail> = MutableLiveData()
@@ -73,9 +71,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             if (_user.value?.uid != null) {
                 firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get()
                     .addOnSuccessListener {
-                        var profile = it.toObject(Profile::class.java)
+                        val profile = it.toObject(Profile::class.java)
                         if (profile?.favList != null) {
-                            for (item in profile!!.favList) {
+                            for (item in profile.favList) {
                                 addLikedItem(item)
                                 updateFav(true, item)
                             }
@@ -141,7 +139,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun signOut() {
-        if (listOfId != null) {
+        if (listOfId.isNotEmpty()) {
             for (item in listOfId) {
                 updateFav(false, item)
             }
@@ -157,9 +155,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 setupUserEnv()
                 firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get()
                     .addOnSuccessListener {
-                        var profile = it.toObject(Profile::class.java)
+                        val profile = it.toObject(Profile::class.java)
                         if (profile?.favList != null) {
-                            for (item in profile!!.favList) {
+                            for (item in profile.favList) {
                                 addLikedItem(item)
                                 updateFav(true, item)
                             }
@@ -204,8 +202,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
             uploadTask.addOnCompleteListener {
                 if (it.isSuccessful) {
-                    imageRef.downloadUrl.addOnCompleteListener {
-                        if (it.isSuccessful) {
+                    imageRef.downloadUrl.addOnCompleteListener {task ->
+                        if (task.isSuccessful) {
                             val imageUrl = it.result.toString()
                             firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
                                 .update("pb", imageUrl)

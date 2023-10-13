@@ -34,8 +34,10 @@ class AppRepository(
 
     suspend fun getGameList() {
         try {
-            val gameList = api.retrofitService.getGamesList()
-            if (database.gameDao.getCount() == 0) database.gameDao.insertGameList(gameList)
+            if (database.gameDao.getCount() == 0){
+                val gameList = api.retrofitService.getGamesList()
+                database.gameDao.insertGameList(gameList)
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }
@@ -50,7 +52,7 @@ class AppRepository(
         }
     }
 
-    suspend fun search(search: String) {
+    fun search(search: String) {
         try {
             _searchResult.postValue(database.gameDao.search(search))
             Log.d("ResultTest", _searchResult.value.toString())
@@ -60,11 +62,11 @@ class AppRepository(
     }
 
     suspend fun getGameDetail(id: Long): GameDetail? {
-        try {
-            return api.retrofitService.getGameDetail(id)
+        return try {
+            api.retrofitService.getGameDetail(id)
         } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
-            return null
+            null
         }
     }
 

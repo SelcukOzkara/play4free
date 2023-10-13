@@ -1,14 +1,11 @@
 package com.example.play4free.ui
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,15 +23,11 @@ import com.example.play4free.R
 import com.example.play4free.adapter.FavAdapter
 import com.example.play4free.databinding.FragmentDashboardBinding
 import com.example.play4free.databinding.ProfilEditBinding
-import com.example.play4free.databinding.SignUpBinding
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
-    val viewModel: GameViewModel by activityViewModels()
+    private val viewModel: GameViewModel by activityViewModels()
     private val favAdapter: FavAdapter by lazy { FavAdapter(viewModel) }
 
     private val getContent =
@@ -53,7 +46,7 @@ class DashboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -86,8 +79,8 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        viewModel.gameList.observe(viewLifecycleOwner) {
-            favAdapter.submitList(it.filter { it.isLiked })
+        viewModel.gameList.observe(viewLifecycleOwner) { gameList ->
+            favAdapter.submitList(gameList.filter { game ->  game.isLiked })
         }
 
 
@@ -107,7 +100,7 @@ class DashboardFragment : Fragment() {
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog.setCancelable(false)
         dialog.setContentView(binding.root)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.setLayout(
             (WindowManager.LayoutParams.MATCH_PARENT),
             (WindowManager.LayoutParams.MATCH_PARENT)
@@ -122,11 +115,11 @@ class DashboardFragment : Fragment() {
                 viewModel.profileRef.update(
                     "username",
                     updatedUsername,
-                )?.addOnSuccessListener {
+                ).addOnSuccessListener {
                     viewModel.setupUserEnv()
                     dialog.dismiss()
                 }
-                    ?.addOnFailureListener { e ->
+                    .addOnFailureListener { e ->
                         e.printStackTrace()
                     }
             } catch (e: Exception) {

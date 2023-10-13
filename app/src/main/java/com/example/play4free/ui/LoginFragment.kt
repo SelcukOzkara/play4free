@@ -26,14 +26,14 @@ import java.util.Locale
 
 class LoginFragment : Fragment() {
 
-    val viewModel: GameViewModel by activityViewModels()
+    private val viewModel: GameViewModel by activityViewModels()
     private lateinit var binding: FragmentLoginBinding
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog.setCancelable(false)
         dialog.setContentView(signUpBinding.root)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.setLayout(
             (WindowManager.LayoutParams.MATCH_PARENT),
             (WindowManager.LayoutParams.MATCH_PARENT)
@@ -84,12 +84,12 @@ class LoginFragment : Fragment() {
         signUpBinding.signUpDateET.setOnClickListener {
             val calendar = Calendar.getInstance()
             val datePickerDialog = DatePickerDialog(
-                requireContext(), { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                requireContext(), { _, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                     val selectedDate = Calendar.getInstance()
                     selectedDate.set(year, monthOfYear, dayOfMonth)
                     val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
                     val formattedDate = dateFormat.format(selectedDate.time)
-                    signUpBinding.signUpDateET.setText("$formattedDate")
+                    signUpBinding.signUpDateET.setText(formattedDate)
                     Log.d("DatePicker", formattedDate)
                 },
                 calendar.get(Calendar.YEAR),
@@ -101,11 +101,11 @@ class LoginFragment : Fragment() {
 
 
         signUpBinding.signUpCreateBTN.setOnClickListener {
-            var email = signUpBinding.signUpEmailET.text.toString()
-            var pw = signUpBinding.signUpPwET.text.toString()
-            var pwCon = signUpBinding.signUpPwSecET.text.toString()
-            var username = signUpBinding.signUpUsernameET.text.toString()
-            var date = signUpBinding.signUpDateET.text.toString()
+            val email = signUpBinding.signUpEmailET.text.toString()
+            val pw = signUpBinding.signUpPwET.text.toString()
+            val pwCon = signUpBinding.signUpPwSecET.text.toString()
+            val username = signUpBinding.signUpUsernameET.text.toString()
+            val date = signUpBinding.signUpDateET.text.toString()
 
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()) {
@@ -153,7 +153,7 @@ class LoginFragment : Fragment() {
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog.setCancelable(false)
         dialog.setContentView(resetBinding.root)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.setLayout(
             (WindowManager.LayoutParams.MATCH_PARENT),
             (WindowManager.LayoutParams.MATCH_PARENT)
@@ -161,7 +161,7 @@ class LoginFragment : Fragment() {
 
 
         resetBinding.resetBTN.setOnClickListener {
-            var email = resetBinding.emailResetET.text.toString()
+            val email = resetBinding.emailResetET.text.toString()
 
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()) {

@@ -15,7 +15,7 @@ class GiveawayAdapter(
     private var viewModel: GameViewModel
 ) : ListAdapter<Giveaways, GiveawayAdapter.ItemViewHolder>(UtilDiffGiveaway()) {
 
-    inner class ItemViewHolder(val binding: GiveawayItemBinding) :
+    inner class ItemViewHolder(private val binding: GiveawayItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Giveaways) {
             with(binding) {

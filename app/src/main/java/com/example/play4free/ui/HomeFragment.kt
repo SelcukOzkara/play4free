@@ -1,7 +1,6 @@
 package com.example.play4free.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,6 @@ import com.example.play4free.R
 import com.example.play4free.adapter.GameAdapter
 import com.example.play4free.databinding.FragmentHomeBinding
 
-private lateinit var binding: FragmentHomeBinding
-
 class HomeFragment : Fragment() {
 
     private val viewModel: GameViewModel by activityViewModels()
@@ -26,7 +23,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }

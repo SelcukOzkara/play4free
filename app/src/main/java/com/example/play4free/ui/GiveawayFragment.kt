@@ -19,7 +19,7 @@ class GiveawayFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGiveawayBinding.inflate(inflater,container,false)
         viewModel.loadGiveawayList()
         binding.giveawayRV.adapter = giveawayAdapter
