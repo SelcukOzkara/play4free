@@ -1,5 +1,6 @@
 package com.example.play4free.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,42 +16,50 @@ import com.example.play4free.databinding.GameListItemBinding
 import com.example.play4free.ui.HomeFragmentDirections
 
 class GameAdapter(
-    private var viewModel : GameViewModel
-): ListAdapter<Games, GameAdapter.ItemViewHolder>(UtilDiffDigimon()) {
+    private var viewModel: GameViewModel
+) : ListAdapter<Games, GameAdapter.ItemViewHolder>(UtilDiffDigimon()) {
 
-    inner class ItemViewHolder(val binding: GameListItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(item: Games){
-            with(binding){
+    inner class ItemViewHolder(val binding: GameListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Games) {
+            with(binding) {
                 homeThumbIV.load(item.thumbnail)
                 homeGameTitleTV.text = item.title
                 homeShortDescTV.text = item.short_description
                 homeGenreTV.text = item.genre
                 homePlatformTV.text = item.platform
 
-                if (viewModel.user.value != null ){
+                if (viewModel.user.value != null) {
                     homeLikeBTN.visibility = View.VISIBLE
-                if (item.isLiked) homeLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
-                else homeLikeBTN.setImageResource(R.drawable.unlike)
+                    if (item.isLiked) homeLikeBTN.setImageResource(R.drawable.baseline_thumb_up_24)
+                    else homeLikeBTN.setImageResource(R.drawable.unlike)
 
-                homeLikeBTN.setOnClickListener {
-                        if (!item.isLiked){
+                    homeLikeBTN.setOnClickListener {
+                        if (!item.isLiked) {
                             viewModel.addLikedItem(item.id)
-                        }else viewModel.removeLikedItem(item.id)
+                        } else viewModel.removeLikedItem(item.id)
 
-                    viewModel.updateFav(!item.isLiked, item.id)
-                }
-                } else  homeLikeBTN.visibility = View.INVISIBLE
+                        viewModel.updateFav(!item.isLiked, item.id)
+                    }
+                } else homeLikeBTN.visibility = View.INVISIBLE
 
                 homeCV.setOnClickListener {
-                    it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
+                    try {
+                        it.findNavController()
+                            .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
+
+                    } catch (e: Exception) {
+                        Log.d("FavAdapterNAV", "Nav Exeption: $e")
+                        Log.d("FavAdapterItem", "Item : $item")
+                    }
                 }
             }
         }
     }
 
-    private class UtilDiffDigimon: DiffUtil.ItemCallback<Games>(){
+    private class UtilDiffDigimon : DiffUtil.ItemCallback<Games>() {
         override fun areItemsTheSame(oldItem: Games, newItem: Games): Boolean {
-            return  oldItem == newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Games, newItem: Games): Boolean {
@@ -70,7 +79,13 @@ class GameAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        return ItemViewHolder(GameListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ItemViewHolder(
+            GameListItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

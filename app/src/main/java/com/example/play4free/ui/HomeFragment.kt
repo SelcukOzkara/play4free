@@ -36,7 +36,12 @@ class HomeFragment : Fragment() {
 
         viewModel.getGameList()
 
-        binding.homeSV.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        binding.refreshSwipe.setOnRefreshListener {
+            viewModel.refreshList()
+            if (binding.refreshSwipe.isRefreshing) binding.refreshSwipe.isRefreshing = false
+        }
+
+        binding.homeSV.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }
@@ -46,7 +51,7 @@ class HomeFragment : Fragment() {
                     viewModel.search(p0)
                 }
 
-                if (p0 == null || p0 == "" ){
+                if (p0 == null || p0 == "") {
                     gameAdapter.submitList(viewModel.gameList.value)
                 } else gameAdapter.submitList(viewModel.searchResult.value)
                 return true
@@ -70,21 +75,36 @@ class HomeFragment : Fragment() {
                 when (p2) {
                     0 -> gameAdapter.submitList(viewModel.gameList.value)
                     1 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "Card Game" })
+                        it.genre == "Card Game"
+                    })
+
                     2 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "Fighting" })
+                        it.genre == "Fighting"
+                    })
+
                     3 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "MMORPG" })
+                        it.genre == "MMORPG"
+                    })
+
                     4 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "MMO" })
+                        it.genre == "MMO"
+                    })
+
                     5 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "MOBA" })
+                        it.genre == "MOBA"
+                    })
+
                     6 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "Shooter" })
+                        it.genre == "Shooter"
+                    })
+
                     7 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "Social" })
+                        it.genre == "Social"
+                    })
+
                     8 -> gameAdapter.submitList(viewModel.gameList.value!!.filter {
-                        it.genre == "Strategy" })
+                        it.genre == "Strategy"
+                    })
                 }
 
             }
@@ -109,7 +129,7 @@ class HomeFragment : Fragment() {
         viewModel.gameList.observe(viewLifecycleOwner) {
             gameAdapter.submitList(it)
             binding.homeSV.clearFocus()
-            binding.homeSV.setQuery("",true)
+            binding.homeSV.setQuery("", true)
         }
     }
 

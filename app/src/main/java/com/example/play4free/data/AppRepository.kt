@@ -36,7 +36,15 @@ class AppRepository(
         try {
             val gameList = api.retrofitService.getGamesList()
             if (database.gameDao.getCount() == 0) database.gameDao.insertGameList(gameList)
-            Log.d("NewTest", _gameList.value.toString())
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading Data from API: $e")
+        }
+    }
+
+    suspend fun refreshList() {
+        try {
+            val gameList = api.retrofitService.getGamesList()
+            database.gameDao.insertGameList(gameList)
         } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }

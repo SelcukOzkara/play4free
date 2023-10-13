@@ -1,5 +1,6 @@
 package com.example.play4free.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,12 @@ class FavAdapter(
 
 
                 favCV.setOnClickListener {
-                    it.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToDetailFragment(item.id))
+                    try {
+                        it.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToDetailFragment(item.id))
+                    }catch (e: Exception){
+                        Log.d("FavAdapterNAV", "Nav Exeption: $e")
+                        Log.d("FavAdapterItem", "Item : $item" )
+                    }
                 }
             }
         }

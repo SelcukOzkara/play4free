@@ -67,15 +67,31 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun search(search: String){
-        viewModelScope.launch (Dispatchers.IO) {
+    fun refreshList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.refreshList()
+            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get()
+                .addOnSuccessListener {
+                    var profile = it.toObject(Profile::class.java)
+                    if (profile?.favList != null) {
+                        for (item in profile!!.favList) {
+                            addLikedItem(item)
+                            updateFav(true, item)
+                        }
+                    }
+                }
+        }
+    }
+
+    fun search(search: String) {
+        viewModelScope.launch(Dispatchers.IO) {
             repo.search(search)
         }
     }
 
-    fun updateFav(like: Boolean, id: Long){
-        viewModelScope.launch (Dispatchers.IO){
-            repo.updateFav(like,id)
+    fun updateFav(like: Boolean, id: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.updateFav(like, id)
         }
     }
 
@@ -97,7 +113,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             profileRef = firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
         }
 
-        if (_user.value != null){
+        if (_user.value != null) {
             profileRef.get().addOnSuccessListener {
                 _currentUserProfile.value = it.toObject(Profile::class.java)
             }
@@ -123,8 +139,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun signOut() {
-        if (listOfId != null){
-            for (item in listOfId){
+        if (listOfId != null) {
+            for (item in listOfId) {
                 updateFav(false, item)
             }
         }
@@ -137,15 +153,16 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 setupUserEnv()
-                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get().addOnSuccessListener {
-                    var profile = it.toObject(Profile::class.java)
-                    if (profile?.favList != null){
-                        for (item in profile!!.favList){
-                            addLikedItem(item)
-                            updateFav(true, item)
+                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get()
+                    .addOnSuccessListener {
+                        var profile = it.toObject(Profile::class.java)
+                        if (profile?.favList != null) {
+                            for (item in profile!!.favList) {
+                                addLikedItem(item)
+                                updateFav(true, item)
+                            }
                         }
                     }
-                }
             } else {
                 Toast.makeText(getApplication(), "Wrong email or password!", Toast.LENGTH_LONG)
                     .show()
@@ -155,25 +172,27 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun resetPw(email: String){
-        if (_user.value != null){
+    fun resetPw(email: String) {
+        if (_user.value != null) {
             firebaseAuth.sendPasswordResetEmail(_user.value?.email!!)
-        } else{
+        } else {
             firebaseAuth.sendPasswordResetEmail(email)
         }
     }
 
-    fun addLikedItem(id: Long){
+    fun addLikedItem(id: Long) {
         listOfId.add(id)
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", listOfId)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            .update("favList", listOfId)
     }
 
-    fun removeLikedItem(id: Long){
+    fun removeLikedItem(id: Long) {
         listOfId.remove(id)
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("favList", listOfId)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            .update("favList", listOfId)
     }
 
-    fun uploadImage(uri: Uri){
+    fun uploadImage(uri: Uri) {
         try {
             val postId = generateImageId()
             val imageFileName = "$postId.jpg"
@@ -182,17 +201,18 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             val uploadTask = imageRef.putFile(uri)
 
             uploadTask.addOnCompleteListener {
-                if (it.isSuccessful){
+                if (it.isSuccessful) {
                     imageRef.downloadUrl.addOnCompleteListener {
-                        if (it.isSuccessful){
+                        if (it.isSuccessful) {
                             val imageUrl = it.result.toString()
-                            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("pb", imageUrl)
+                            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+                                .update("pb", imageUrl)
                             setupUserEnv()
                         }
                     }
                 }
             }
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
