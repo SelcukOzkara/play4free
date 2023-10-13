@@ -36,11 +36,11 @@ class HomeFragment : Fragment() {
 
         viewModel.getGameList()
 
-
         binding.homeSV.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }
+
             override fun onQueryTextChange(p0: String?): Boolean {
                 if (p0 != null) {
                     viewModel.search(p0)
@@ -49,7 +49,6 @@ class HomeFragment : Fragment() {
                 if (p0 == null || p0 == "" ){
                     gameAdapter.submitList(viewModel.gameList.value)
                 } else gameAdapter.submitList(viewModel.searchResult.value)
-                Log.d("SearchViewTest", viewModel.searchResult.value.toString())
                 return true
             }
         })
@@ -109,6 +108,8 @@ class HomeFragment : Fragment() {
 
         viewModel.gameList.observe(viewLifecycleOwner) {
             gameAdapter.submitList(it)
+            binding.homeSV.clearFocus()
+            binding.homeSV.setQuery("",true)
         }
     }
 
