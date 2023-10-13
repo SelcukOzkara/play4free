@@ -70,16 +70,18 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun refreshList() {
         viewModelScope.launch(Dispatchers.IO) {
             repo.refreshList()
-            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get()
-                .addOnSuccessListener {
-                    var profile = it.toObject(Profile::class.java)
-                    if (profile?.favList != null) {
-                        for (item in profile!!.favList) {
-                            addLikedItem(item)
-                            updateFav(true, item)
+            if (_user.value?.uid != null) {
+                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get()
+                    .addOnSuccessListener {
+                        var profile = it.toObject(Profile::class.java)
+                        if (profile?.favList != null) {
+                            for (item in profile!!.favList) {
+                                addLikedItem(item)
+                                updateFav(true, item)
+                            }
                         }
                     }
-                }
+            }
         }
     }
 
