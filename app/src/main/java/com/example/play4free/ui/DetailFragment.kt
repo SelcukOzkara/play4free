@@ -4,14 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.play4free.GameViewModel
+import com.example.play4free.R
 import com.example.play4free.databinding.FragmentDetailBinding
 
 
@@ -44,14 +47,56 @@ class DetailFragment : Fragment() {
                 detailRamTV.text = it.minimum_system_requirements?.memory ?: "n/a"
                 detailGpuTV.text = it.minimum_system_requirements?.graphics ?: "n/a"
                 detailStorageTV.text = it.minimum_system_requirements?.storage ?: "n/a"
-                try {
-                    detailScreen1IV.load(it.screenshots[0].image)
-                    detailScreen2IV.load(it.screenshots[1].image)
-                    detailScreen3IV.load(it.screenshots[2].image)
-                    detailScreen4IV.load(it.screenshots[3].image)
-                }catch (e:Exception){
 
+                Log.d("ListCheck", it.screenshots.toString())
+
+                var count = it.screenshots.count() -1
+
+                for (image in it.screenshots) {
+                    if (!it.screenshots.isNullOrEmpty() && count >= 0) {
+                        detailScreenshotsTTV.visibility = View.VISIBLE
+                        when (count) {
+                            0 -> {
+                                detailScreen1IV.load(it.screenshots[count].image)
+                                detailScreen1IV.visibility = View.VISIBLE
+                            }
+                            1 -> {
+                                detailScreen2IV.load(it.screenshots[count].image)
+                                detailScreen2IV.visibility = View.VISIBLE
+                            }
+                            2 -> {
+                                detailScreen3IV.load(it.screenshots[count].image)
+                                detailScreen3IV.visibility = View.VISIBLE
+                            }
+                            3 -> {
+                                detailScreen4IV.load(it.screenshots[count].image)
+                                detailScreen4IV.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                    count--
                 }
+
+                when (it.screenshots.count()) {
+                    0 -> {
+                        detailScreenshotsTTV.visibility = View.GONE
+                        detailScreen1IV.visibility = View.GONE
+                        detailScreen2IV.visibility = View.GONE
+                        detailScreen3IV.visibility = View.GONE
+                        detailScreen4IV.visibility = View.GONE
+                    }
+                    1 -> {
+                        detailScreen2IV.visibility = View.GONE
+                        detailScreen3IV.visibility = View.GONE
+                        detailScreen4IV.visibility = View.GONE
+                    }
+                    2 -> {
+                        detailScreen3IV.visibility = View.GONE
+                        detailScreen4IV.visibility = View.GONE
+                    }
+                    3 -> detailScreen4IV.visibility = View.GONE
+                }
+
 
                 detailShareBTN.setOnClickListener {
                     share(viewModel.gameDetail.value!!.game_url)
@@ -68,9 +113,9 @@ class DetailFragment : Fragment() {
 
 
                 detailReadMoreTV.setOnClickListener {
-                        detailDescTV.toggle()
-                        if (!detailDescTV.isExpanded) detailReadMoreTV.text = "read less"
-                        else detailReadMoreTV.text = "read more"
+                    detailDescTV.toggle()
+                    if (!detailDescTV.isExpanded) detailReadMoreTV.text = "read less"
+                    else detailReadMoreTV.text = "read more"
                 }
 
 

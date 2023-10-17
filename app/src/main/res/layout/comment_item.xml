@@ -48,7 +48,7 @@
         android:layout_height="52dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:src="@tools:sample/avatars"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
