@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.example.play4free.GameViewModel
 import com.example.play4free.R
 import com.example.play4free.databinding.FragmentDetailBinding
@@ -57,19 +58,39 @@ class DetailFragment : Fragment() {
                         detailScreenshotsTTV.visibility = View.VISIBLE
                         when (count) {
                             0 -> {
-                                detailScreen1IV.load(it.screenshots[count].image)
+                                detailScreen1IV.load(it.screenshots[count].image) {
+                                    crossfade(true)
+                                    placeholder(R.drawable.placeholder_image)
+                                    error(R.drawable.baseline_error_outline_24)
+                                    transformations(RoundedCornersTransformation(40f))
+                                }
                                 detailScreen1IV.visibility = View.VISIBLE
                             }
                             1 -> {
-                                detailScreen2IV.load(it.screenshots[count].image)
+                                detailScreen2IV.load(it.screenshots[count].image){
+                                    crossfade(true)
+                                    placeholder(R.drawable.placeholder_image)
+                                    error(R.drawable.baseline_error_outline_24)
+                                    transformations(RoundedCornersTransformation(40f))
+                                }
                                 detailScreen2IV.visibility = View.VISIBLE
                             }
                             2 -> {
-                                detailScreen3IV.load(it.screenshots[count].image)
+                                detailScreen3IV.load(it.screenshots[count].image){
+                                    crossfade(true)
+                                    placeholder(R.drawable.placeholder_image)
+                                    error(R.drawable.baseline_error_outline_24)
+                                    transformations(RoundedCornersTransformation(40f))
+                                }
                                 detailScreen3IV.visibility = View.VISIBLE
                             }
                             3 -> {
-                                detailScreen4IV.load(it.screenshots[count].image)
+                                detailScreen4IV.load(it.screenshots[count].image){
+                                    crossfade(true)
+                                    placeholder(R.drawable.placeholder_image)
+                                    error(R.drawable.baseline_error_outline_24)
+                                    transformations(RoundedCornersTransformation(40f))
+                                }
                                 detailScreen4IV.visibility = View.VISIBLE
                             }
                         }
