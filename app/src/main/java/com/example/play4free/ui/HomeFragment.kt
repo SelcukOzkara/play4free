@@ -1,6 +1,7 @@
 package com.example.play4free.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.example.play4free.GameViewModel
 import com.example.play4free.R
 import com.example.play4free.adapter.GameAdapter
@@ -40,20 +42,28 @@ class HomeFragment : Fragment() {
 
         binding.homeSV.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
+                binding.homeRV.scrollToPosition(0)
+                binding.homeSV.clearFocus()
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                if (p0 != null) {
-                    viewModel.search(p0)
-                }
 
-                if (p0 == null || p0 == "") {
-                    gameAdapter.submitList(viewModel.gameList.value)
-                } else gameAdapter.submitList(viewModel.searchResult.value)
+            override fun onQueryTextChange(p0: String?): Boolean {
+                if (p0 != null) viewModel.search(p0)
+
+                if (p0.isNullOrEmpty()) gameAdapter.submitList(viewModel.gameList.value)
+                else gameAdapter.submitList(viewModel.searchResult.value)
+
+                binding.homeRV.scrollToPosition(0)
+                Log.d("TestLog", p0.toString())
                 return true
             }
         })
+
+        binding.homeSV.setOnSearchClickListener {
+            binding.homeRV.scrollToPosition(0)
+        }
+
 
 
         val spinner = binding.homeFilterSPN
@@ -122,6 +132,11 @@ class HomeFragment : Fragment() {
         }
 
         binding.homeRV.adapter = gameAdapter
+
+
+        binding.upFAB.setOnClickListener {
+            binding.homeRV.scrollToPosition(0)
+        }
 
         viewModel.gameList.observe(viewLifecycleOwner) {
             gameAdapter.submitList(it)
