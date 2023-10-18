@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
                 else gameAdapter.submitList(viewModel.searchResult.value)
 
                 binding.homeRV.scrollToPosition(0)
-                Log.d("TestLog", p0.toString())
+
                 return true
             }
         })
@@ -63,7 +63,6 @@ class HomeFragment : Fragment() {
         binding.homeSV.setOnSearchClickListener {
             binding.homeRV.scrollToPosition(0)
         }
-
 
 
         val spinner = binding.homeFilterSPN
