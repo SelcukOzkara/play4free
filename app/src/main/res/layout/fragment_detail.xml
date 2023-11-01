@@ -265,7 +265,7 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usernameET"
+            android:id="@+id/commentET"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -273,19 +273,19 @@
             android:ems="10"
             android:hint="Comment"
             android:inputType="text"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/addCommentBTN"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/commentRV" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addCommentBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text="SEND"
-            app:layout_constraintBottom_toBottomOf="@+id/usernameET"
+            app:layout_constraintBottom_toBottomOf="@+id/commentET"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/usernameET" />
+            app:layout_constraintTop_toTopOf="@+id/commentET" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

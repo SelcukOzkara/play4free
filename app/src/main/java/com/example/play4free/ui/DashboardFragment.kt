@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,11 +60,11 @@ class DashboardFragment : Fragment() {
         var date: String?
         var pb: String?
 
-
         viewModel.currentUserProfile.observe(viewLifecycleOwner) {
             username = viewModel.currentUserProfile.value?.username
             date = viewModel.currentUserProfile.value?.date
             pb = viewModel.currentUserProfile.value?.pb
+
             binding.dashboardUsernameTV.text = username
             binding.dashboardMailTV.text = date
 

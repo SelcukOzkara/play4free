@@ -2,12 +2,14 @@ package com.example.play4free
 
 import android.app.Application
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.play4free.data.AppRepository
+import com.example.play4free.data.datamodels.Comments
 import com.example.play4free.data.datamodels.GameDetail
 import com.example.play4free.data.datamodels.Profile
 import com.example.play4free.data.local.getData
@@ -220,4 +222,17 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private fun generateImageId(): String {
         return System.currentTimeMillis().toString()
     }
+
+    fun getCommentDocumentReference(commentIdentifier: String) : DocumentReference{
+        return firestore.collection("comments").document(commentIdentifier)
+    }
+
+    fun addCommentToComments(commentIdentifier: String, comment : Comments) {
+        firestore
+            .collection("comments")
+            .document(commentIdentifier)
+            .collection("comment")
+            .add(comment)
+    }
+
 }

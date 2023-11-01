@@ -16,13 +16,19 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.play4free.GameViewModel
 import com.example.play4free.R
+import com.example.play4free.adapter.CommentAdapter
+import com.example.play4free.data.datamodels.Comments
 import com.example.play4free.databinding.FragmentDetailBinding
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.ktx.toObjects
 
 
 class DetailFragment : Fragment() {
 
     private val viewModel: GameViewModel by activityViewModels()
     private lateinit var binding: FragmentDetailBinding
+    private lateinit var commentIdentifier: String
+    private lateinit var commentDocumentReference: DocumentReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +43,8 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getGameDetail(requireArguments().getLong("id"))
+        commentIdentifier = requireArguments().getLong("id").toString()
+        commentDocumentReference = viewModel.getCommentDocumentReference(commentIdentifier)
 
         viewModel.gameDetail.observe(viewLifecycleOwner) {
             with(binding) {
@@ -139,10 +147,29 @@ class DetailFragment : Fragment() {
                     else detailReadMoreTV.text = "read more"
                 }
 
+                commentDocumentReference.collection("comment").addSnapshotListener { value, error ->
+                    if (error == null && value != null) {
+                        val comments = value.toObjects<Comments>()
+                        commentRV.adapter = CommentAdapter(comments, viewModel.user.value?.uid , requireContext())
+                    } else {
 
+                        Log.e("FirebaseLog", "Error retrieving chat with identifier: $commentIdentifier")
+                    }
+                }
+
+                addCommentBTN.setOnClickListener {
+                    val userPb = viewModel.currentUserProfile.value?.pb
+                    val userId = viewModel.user.value?.uid
+                    val comment = Comments( userId, userPb, binding.commentET.text.toString())
+                    viewModel.addCommentToComments(commentIdentifier, comment)
+                }
             }
         }
+
+
     }
+
+
 
     private fun share(textToShare: String) {
         val shareIntent = Intent(Intent.ACTION_SEND)
