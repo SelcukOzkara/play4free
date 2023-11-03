@@ -149,10 +149,9 @@ class DetailFragment : Fragment() {
 
                 commentDocumentReference.collection("comment").addSnapshotListener { value, error ->
                     if (error == null && value != null) {
-                        val comments = value.toObjects<Comments>()
-                        commentRV.adapter = CommentAdapter(comments, viewModel.user.value?.uid , requireContext())
+                        val comments = value.toObjects<Comments>().takeLast(3)
+                        commentRV.adapter = CommentAdapter(comments, viewModel.user.value?.uid , requireContext(), viewModel)
                     } else {
-
                         Log.e("FirebaseLog", "Error retrieving chat with identifier: $commentIdentifier")
                     }
                 }
@@ -162,11 +161,10 @@ class DetailFragment : Fragment() {
                     val userId = viewModel.user.value?.uid
                     val comment = Comments( userId, userPb, binding.commentET.text.toString())
                     viewModel.addCommentToComments(commentIdentifier, comment)
+                    commentET.text?.clear()
                 }
             }
         }
-
-
     }
 
 

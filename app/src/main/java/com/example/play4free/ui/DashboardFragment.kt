@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.provider.Settings.Global
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,9 @@ import com.example.play4free.R
 import com.example.play4free.adapter.FavAdapter
 import com.example.play4free.databinding.FragmentDashboardBinding
 import com.example.play4free.databinding.ProfilEditBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
 
@@ -38,7 +42,9 @@ class DashboardFragment : Fragment() {
                 data?.data?.let { uri ->
                     binding.dashboardPbIV.setImageURI(uri)
                     binding.dashboardPbIV.visibility = View.VISIBLE
-                    viewModel.uploadImage(uri)
+                    GlobalScope.launch (Dispatchers.IO) {
+                        viewModel.uploadImage(uri)
+                    }
                 }
             }
         }

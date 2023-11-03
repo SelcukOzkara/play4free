@@ -24,11 +24,12 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
-    private val firestore = FirebaseFirestore.getInstance()
+    val firestore = FirebaseFirestore.getInstance()
     private val storage = Firebase.storage.reference
     private var database = getData(application)
     private val repo = AppRepository(GamesApi, GiveawayApi, database)
@@ -151,6 +152,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _user.value = firebaseAuth.currentUser
     }
 
+
+
     fun signIn(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { it ->
             if (it.isSuccessful) {
@@ -194,7 +197,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             .update("favList", listOfId)
     }
 
-    fun uploadImage(uri: Uri) {
+    suspend fun uploadImage(uri: Uri) {
         try {
             val postId = generateImageId()
             val imageFileName = "$postId.jpg"
@@ -202,18 +205,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             val imageRef = imageReference.child(imageFileName)
             val uploadTask = imageRef.putFile(uri)
 
-            uploadTask.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    imageRef.downloadUrl.addOnCompleteListener {task ->
-                        if (task.isSuccessful) {
-                            val imageUrl = it.result.toString()
+            uploadTask.await()
+
+            if (uploadTask.isSuccessful) {
+                            val imageUrl = imageRef.downloadUrl.await()
                             firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
                                 .update("pb", imageUrl)
                             setupUserEnv()
                         }
-                    }
-                }
-            }
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -1,6 +1,7 @@
 package com.example.play4free
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -16,6 +17,19 @@ class MainActivity : AppCompatActivity() {
 
         val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
         binding.bottomNavigationView.setupWithNavController(navController)
+
+        binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
+
+            Log.e(
+                "Stack",
+                navController.currentBackStack.value.joinToString {"${it.destination.displayName}\n" })
+
+            if (navController.currentDestination!!.id != menuItem.itemId){
+                navController.navigate(menuItem.itemId)
+            }
+            false
+        }
+
     }
 
 
