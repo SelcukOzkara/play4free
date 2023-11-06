@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import android.widget.ImageButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -19,6 +20,7 @@ import com.example.play4free.R
 import com.example.play4free.adapter.CommentAdapter
 import com.example.play4free.data.datamodels.Comments
 import com.example.play4free.databinding.FragmentDetailBinding
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.toObjects
 
@@ -45,6 +47,12 @@ class DetailFragment : Fragment() {
         viewModel.getGameDetail(requireArguments().getLong("id"))
         commentIdentifier = requireArguments().getLong("id").toString()
         commentDocumentReference = viewModel.getCommentDocumentReference(commentIdentifier)
+
+        var toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
+        var icon = toolbar.findViewById<ImageButton>(R.id.imageButton)
+
+        toolbar.visibility = View.VISIBLE
+        icon.visibility = View.GONE
 
         viewModel.gameDetail.observe(viewLifecycleOwner) {
             with(binding) {

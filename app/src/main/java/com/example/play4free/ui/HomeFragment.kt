@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.ImageButton
 import android.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +18,7 @@ import com.example.play4free.GameViewModel
 import com.example.play4free.R
 import com.example.play4free.adapter.GameAdapter
 import com.example.play4free.databinding.FragmentHomeBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 class HomeFragment : Fragment() {
 
@@ -40,7 +44,23 @@ class HomeFragment : Fragment() {
             if (binding.refreshSwipe.isRefreshing) binding.refreshSwipe.isRefreshing = false
         }
 
-        binding.homeSV.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        var toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
+        var icon = toolbar.findViewById<ImageButton>(R.id.imageButton)
+
+        toolbar.visibility = View.VISIBLE
+        icon.visibility = View.GONE
+
+        binding.homeRV.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView,dx: Int,dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (binding.homeRV.computeVerticalScrollOffset() < 1200){
+                    binding.upFAB.visibility = View.GONE
+                } else binding.upFAB.visibility = View.VISIBLE
+            }
+        })
+
+
+        binding.homeSV.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 binding.homeRV.scrollToPosition(0)
                 binding.homeSV.clearFocus()

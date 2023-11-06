@@ -31,6 +31,9 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Username"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10"
+                    style="@style/textInputStyle"
                     app:endIconMode="clear_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +53,7 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Email"
+                    style="@style/textInputStyle"
                     app:endIconMode="clear_text"
                     app:layout_constraintEnd_toEndOf="@+id/signUpUsernameLayout"
                     app:layout_constraintStart_toStartOf="@+id/signUpUsernameLayout"
@@ -69,6 +73,7 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Birthdate"
+                    style="@style/textInputStyle"
                     app:layout_constraintEnd_toEndOf="@+id/signUpEmailLayout"
                     app:layout_constraintStart_toStartOf="@+id/signUpEmailLayout"
                     app:layout_constraintTop_toBottomOf="@+id/signUpEmailLayout">
@@ -90,6 +95,7 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Password"
+                    style="@style/textInputStyle"
                     app:endIconMode="password_toggle"
                     app:layout_constraintEnd_toEndOf="@+id/signUpDateLayout"
                     app:layout_constraintStart_toStartOf="@+id/signUpDateLayout"
@@ -109,6 +115,7 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Repeat Password"
+                    style="@style/textInputStyle"
                     app:endIconMode="password_toggle"
                     app:layout_constraintEnd_toEndOf="@+id/signUpPwLayout"
                     app:layout_constraintStart_toStartOf="@+id/signUpPwLayout"
@@ -121,22 +128,24 @@
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/signUpCreateBTN"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="Create Account"
+                    style="@style/mainButton"
                     app:layout_constraintEnd_toEndOf="@+id/messageET"
                     app:layout_constraintStart_toStartOf="@+id/messageET"
                     app:layout_constraintTop_toBottomOf="@+id/messageET" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/signUpAbortBTN"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Cancle"
+                    android:text="Cancel"
+                    style="@style/secondButton"
                     app:layout_constraintEnd_toEndOf="@+id/signUpCreateBTN"
                     app:layout_constraintStart_toStartOf="@+id/signUpCreateBTN"
                     app:layout_constraintTop_toBottomOf="@+id/signUpCreateBTN" />

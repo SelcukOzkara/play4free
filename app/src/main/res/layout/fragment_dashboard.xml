@@ -23,21 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
+        style="@style/TitleText"
         app:layout_constraintEnd_toEndOf="@+id/dashboardPbIV"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="@+id/dashboardPbIV"
         app:layout_constraintTop_toBottomOf="@+id/dashboardPbIV" />
-
-    <ImageButton
-        android:id="@+id/dashboardLogOutBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/baseline_exit_to_app_24"
-        android:backgroundTint="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/dashboardSettingBTN"
@@ -58,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
+        style="@style/TitleText"
         app:layout_constraintEnd_toEndOf="@+id/dashboardUsernameTV"
         app:layout_constraintStart_toStartOf="@+id/dashboardUsernameTV"
         app:layout_constraintTop_toBottomOf="@+id/dashboardUsernameTV" />
@@ -82,7 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Favourites"
+        android:text="Favorites"
+        style="@style/TitleText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboardMailTV" />
 

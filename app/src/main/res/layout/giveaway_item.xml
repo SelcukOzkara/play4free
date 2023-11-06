@@ -25,7 +25,7 @@
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background"
-                android:foreground="@color/whiteAlpha"
+                android:foreground="@drawable/card_gradient"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="150dp"
                 android:text="TextView"
+                style="@style/TitleText"
                 app:layout_constraintStart_toStartOf="@+id/giveawayDescTV"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:text="GET"
+                style="@style/mainButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -59,6 +61,8 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="TextView"
+                android:textColor="@color/white"
+                style="@style/secondText"
                 app:animation_duration="750"
                 app:layout_constraintBottom_toTopOf="@+id/getBTN"
                 app:layout_constraintEnd_toEndOf="parent"

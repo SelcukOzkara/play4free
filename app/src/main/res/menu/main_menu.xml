@@ -4,16 +4,16 @@
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="P4F"
+        android:icon="@drawable/home_player"
         android:id="@+id/homeFragment"/>
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Giveaways"
+        android:icon="@drawable/giftcard"
         android:id="@+id/giveawayFragment"/>
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Dashboard"
+        android:icon="@drawable/profile"
         android:id="@+id/loginFragment"/>
 </menu>

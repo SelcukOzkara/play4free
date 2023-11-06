@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,6 +26,7 @@ import com.example.play4free.R
 import com.example.play4free.adapter.FavAdapter
 import com.example.play4free.databinding.FragmentDashboardBinding
 import com.example.play4free.databinding.ProfilEditBinding
+import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -62,6 +64,12 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.favRV.adapter = favAdapter
 
+        var toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
+        var icon = toolbar.findViewById<ImageButton>(R.id.imageButton)
+
+        toolbar.visibility = View.VISIBLE
+        icon.visibility = View.VISIBLE
+
         var username: String?
         var date: String?
         var pb: String?
@@ -95,7 +103,7 @@ class DashboardFragment : Fragment() {
             showDialog()
         }
 
-        binding.dashboardLogOutBTN.setOnClickListener {
+        icon.setOnClickListener {
             viewModel.signOut()
             findNavController().popBackStack()
         }

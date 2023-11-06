@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
@@ -12,6 +13,7 @@
         android:id="@+id/homeCV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/cardBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,6 +39,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="TextView"
+                style="@style/TitleText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homeThumbIV" />
 
@@ -46,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="TextView"
+                style="@style/secondText"
                 app:layout_constraintStart_toStartOf="@+id/homeGameTitleTV"
                 app:layout_constraintTop_toBottomOf="@+id/homeGameTitleTV" />
 
@@ -56,6 +60,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="Genre:"
+                style="@style/secondText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/homeShortDescTV"
                 app:layout_constraintTop_toBottomOf="@+id/homeShortDescTV" />
@@ -66,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:text="TextView"
+                style="@style/secondText"
                 app:layout_constraintBottom_toBottomOf="@+id/homeGenreInfoTV"
                 app:layout_constraintStart_toEndOf="@+id/homeGenreInfoTV"
                 app:layout_constraintTop_toTopOf="@+id/homeGenreInfoTV" />
@@ -76,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
+                style="@style/secondText"
                 app:layout_constraintBottom_toBottomOf="@+id/homeGenreTV"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/homeGenreTV" />
@@ -84,12 +91,21 @@
                 android:id="@+id/homeLikeBTN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/homeGameTitleTV"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/homeGameTitleTV"
                 app:srcCompat="@drawable/unlike" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/homeThumbIV"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:foreground="@drawable/card_gradient"
+                app:layout_constraintStart_toStartOf="parent"></LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

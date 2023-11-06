@@ -4,4 +4,11 @@
     <color name="blackAlpha">#7E000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="whiteAlpha">#A6FFFFFF</color>
+    <color name="MainBackground">#292929</color>
+    <color name="cardBackground">#464646</color>
+    <color name="mainTextColor">#D8D8D8</color>
+    <color name="secondTextColor">#ACACAC</color>
+    <color name="mainButtonColor">#F35A13</color>
+    <color name="buttonStroke">#FA6D2C</color>
+    <color name="transparent">#00000000</color>
 </resources>

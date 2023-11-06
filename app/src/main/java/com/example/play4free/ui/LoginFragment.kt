@@ -11,14 +11,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.play4free.GameViewModel
+import com.example.play4free.R
 import com.example.play4free.databinding.FragmentLoginBinding
 import com.example.play4free.databinding.ResetPwBinding
 import com.example.play4free.databinding.SignUpBinding
+import com.google.android.material.appbar.MaterialToolbar
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -48,6 +51,9 @@ class LoginFragment : Fragment() {
         binding.loginPwResetTV.setOnClickListener {
             showResetDialog()
         }
+        var toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
+
+        toolbar.visibility = View.GONE
 
         binding.loginSignInBTN.setOnClickListener {
             val email = binding.loginMailET.text.toString()

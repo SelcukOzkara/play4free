@@ -22,41 +22,45 @@
                 android:layout_height="wrap_content"
                 android:padding="24dp">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/editPbBTN"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="Upload new picture"
+                    style="@style/secondButton"
                     app:layout_constraintBottom_toTopOf="@+id/saveBTN"
                     app:layout_constraintEnd_toEndOf="@+id/saveBTN"
                     app:layout_constraintStart_toStartOf="@+id/saveBTN" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/saveBTN"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:text="Save"
+                    style="@style/secondButton"
                     app:layout_constraintBottom_toTopOf="@+id/editPwBTN"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/editPwBTN"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Change Password"
+                    style="@style/secondButton"
                     app:layout_constraintEnd_toEndOf="@+id/saveBTN"
                     app:layout_constraintStart_toStartOf="@+id/saveBTN"
                     app:layout_constraintTop_toBottomOf="@+id/saveBTN" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancleBTN"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="Button"
+                    android:text="CANCEL"
+                    style="@style/mainButton"
                     app:layout_constraintEnd_toEndOf="@+id/editPwBTN"
                     app:layout_constraintStart_toStartOf="@+id/editPwBTN"
                     app:layout_constraintTop_toBottomOf="@+id/editPwBTN" />
@@ -67,7 +71,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="26dp"
                     android:ems="10"
+                    style="@style/textInputStyle"
                     android:hint="Username"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10"
                     app:endIconMode="clear_text"
                     app:layout_constraintBottom_toTopOf="@+id/editPbBTN"
                     app:layout_constraintEnd_toEndOf="parent"

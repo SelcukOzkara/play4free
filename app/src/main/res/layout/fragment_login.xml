@@ -15,6 +15,9 @@
         android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="Email"
+        app:placeholderText="example@gmail.com"
+        app:placeholderTextColor="@color/white"
+        style="@style/textInputStyle"
         app:layout_constraintEnd_toEndOf="@+id/loginLogoIV"
         app:layout_constraintStart_toStartOf="@+id/loginLogoIV"
         app:layout_constraintTop_toBottomOf="@+id/loginLogoIV">
@@ -34,6 +37,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Password"
+        style="@style/textInputStyle"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="@+id/loginMailLayout"
         app:layout_constraintStart_toStartOf="@+id/loginMailLayout"
@@ -60,7 +64,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginSignInBTN"
-        android:layout_width="wrap_content"
+        style="@style/mainButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Sign In"
@@ -70,7 +75,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginSignUpBTN"
-        android:layout_width="wrap_content"
+        style="@style/secondButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Sign Up"
