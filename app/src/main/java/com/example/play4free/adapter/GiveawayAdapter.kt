@@ -1,7 +1,11 @@
 package com.example.play4free.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +16,8 @@ import com.example.play4free.databinding.GiveawayItemBinding
 
 
 class GiveawayAdapter(
-    private var viewModel: GameViewModel
+    private var viewModel: GameViewModel,
+    private var context: Context
 ) : ListAdapter<Giveaways, GiveawayAdapter.ItemViewHolder>(UtilDiffGiveaway()) {
 
     inner class ItemViewHolder(private val binding: GiveawayItemBinding) :
@@ -22,7 +27,11 @@ class GiveawayAdapter(
                 giveawayIV.load(item.image)
                 giveawayTitleTV.text = item.title
                 giveawayDescTV.text = item.instructions
-
+                getBTN.setOnClickListener {
+                    val getNow = Intent(Intent.ACTION_VIEW)
+                    getNow.data = Uri.parse(item.open_giveaway_url)
+                    startActivity(context, getNow, null)
+                }
                 giveawayCV.setOnClickListener {
                     giveawayDescTV.toggle()
                 }

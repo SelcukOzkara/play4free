@@ -76,11 +76,9 @@ class DashboardFragment : Fragment() {
 
         viewModel.currentUserProfile.observe(viewLifecycleOwner) {
             username = viewModel.currentUserProfile.value?.username
-            date = viewModel.currentUserProfile.value?.date
             pb = viewModel.currentUserProfile.value?.pb
 
             binding.dashboardUsernameTV.text = username
-            binding.dashboardMailTV.text = date
 
             if (!pb.isNullOrEmpty()) {
                 binding.dashboardPbIV.load(pb) {

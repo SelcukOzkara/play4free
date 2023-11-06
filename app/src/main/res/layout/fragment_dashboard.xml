@@ -19,13 +19,13 @@
 
     <TextView
         android:id="@+id/dashboardUsernameTV"
+        style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:textSize="24dp"
         android:text="TextView"
-        style="@style/TitleText"
         app:layout_constraintEnd_toEndOf="@+id/dashboardPbIV"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="@+id/dashboardPbIV"
         app:layout_constraintTop_toBottomOf="@+id/dashboardPbIV" />
 
@@ -41,17 +41,6 @@
         app:layout_constraintEnd_toEndOf="@+id/dashboardPbIV"
         app:layout_constraintStart_toStartOf="@+id/dashboardPbIV"
         app:layout_constraintTop_toTopOf="@+id/dashboardPbIV" />
-
-    <TextView
-        android:id="@+id/dashboardMailTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        style="@style/TitleText"
-        app:layout_constraintEnd_toEndOf="@+id/dashboardUsernameTV"
-        app:layout_constraintStart_toStartOf="@+id/dashboardUsernameTV"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardUsernameTV" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favRV"
@@ -69,13 +58,13 @@
 
     <TextView
         android:id="@+id/dashboardFavTV"
+        style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Favorites"
-        style="@style/TitleText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardMailTV" />
+        app:layout_constraintTop_toBottomOf="@+id/dashboardUsernameTV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

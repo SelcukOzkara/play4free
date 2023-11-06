@@ -17,7 +17,7 @@ class GiveawayFragment : Fragment() {
 
     private val viewModel: GameViewModel by activityViewModels()
     private lateinit var binding: FragmentGiveawayBinding
-    private val giveawayAdapter: GiveawayAdapter by lazy { GiveawayAdapter(viewModel) }
+    private val giveawayAdapter: GiveawayAdapter by lazy { GiveawayAdapter(viewModel,requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
