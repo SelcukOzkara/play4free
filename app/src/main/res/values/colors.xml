@@ -5,7 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="whiteAlpha">#A6FFFFFF</color>
     <color name="MainBackground">#292929</color>
-    <color name="cardBackground">#464646</color>
+    <color name="cardBackground">#2C2B2B</color>
     <color name="mainTextColor">#D8D8D8</color>
     <color name="secondTextColor">#ACACAC</color>
     <color name="mainButtonColor">#F35A13</color>

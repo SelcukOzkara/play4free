@@ -210,8 +210,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             if (uploadTask.isSuccessful) {
                             val imageUrl = imageRef.downloadUrl.await()
                             firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
-                                .update("pb", imageUrl)
-                            setupUserEnv()
+                                .update("pb", imageUrl).addOnSuccessListener {
+                                    setupUserEnv()
+                                }
                         }
         } catch (e: Exception) {
             e.printStackTrace()

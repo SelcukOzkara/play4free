@@ -157,22 +157,35 @@ class DetailFragment : Fragment() {
 
                 commentDocumentReference.collection("comment").addSnapshotListener { value, error ->
                     if (error == null && value != null) {
-                        val comments = value.toObjects<Comments>().takeLast(3)
+                        val comments = value.toObjects<Comments>().sortedBy { it.timestamp }.takeLast(5)
                         commentRV.adapter = CommentAdapter(comments, viewModel.user.value?.uid , requireContext(), viewModel)
                     } else {
-                        Log.e("FirebaseLog", "Error retrieving chat with identifier: $commentIdentifier")
+                        Log.e("FirebaseLog",
+                            "Error retrieving chat with identifier: $commentIdentifier $value $error"
+                        )
                     }
                 }
 
                 addCommentBTN.setOnClickListener {
                     val userPb = viewModel.currentUserProfile.value?.pb
                     val userId = viewModel.user.value?.uid
-                    val comment = Comments( userId, userPb, binding.commentET.text.toString())
+                    val comment = Comments( userId, userPb, binding.commentET.text.toString(), System.currentTimeMillis())
                     viewModel.addCommentToComments(commentIdentifier, comment)
                     commentET.text?.clear()
                 }
+
+                viewModel.user.observe(viewLifecycleOwner){
+                    if(it?.uid == null){
+                        addCommentBTN.visibility = View.GONE
+                        commentET.visibility = View.GONE
+                    } else{
+                        addCommentBTN.visibility = View.VISIBLE
+                        commentET.visibility = View.VISIBLE
+                    }
+                }
             }
         }
+
     }
 
 

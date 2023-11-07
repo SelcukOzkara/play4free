@@ -75,6 +75,7 @@ class DashboardFragment : Fragment() {
         var pb: String?
 
         viewModel.currentUserProfile.observe(viewLifecycleOwner) {
+            Log.d("TestObsv", "Trigger")
             username = viewModel.currentUserProfile.value?.username
             pb = viewModel.currentUserProfile.value?.pb
 
