@@ -44,7 +44,7 @@ class DashboardFragment : Fragment() {
                 data?.data?.let { uri ->
                     binding.dashboardPbIV.setImageURI(uri)
                     binding.dashboardPbIV.visibility = View.VISIBLE
-                    GlobalScope.launch (Dispatchers.IO) {
+                    GlobalScope.launch(Dispatchers.IO) {
                         viewModel.uploadImage(uri)
                     }
                 }
@@ -94,7 +94,7 @@ class DashboardFragment : Fragment() {
         }
 
         viewModel.gameList.observe(viewLifecycleOwner) { gameList ->
-            favAdapter.submitList(gameList.filter { game ->  game.isLiked })
+            favAdapter.submitList(gameList.filter { game -> game.isLiked })
         }
 
 

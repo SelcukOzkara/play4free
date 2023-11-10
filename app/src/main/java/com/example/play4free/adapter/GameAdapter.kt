@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -44,14 +45,16 @@ class GameAdapter(
                 } else homeLikeBTN.visibility = View.INVISIBLE
 
                 homeCV.setOnClickListener {
-                    try {
-                        it.findNavController()
-                            .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
 
-                    } catch (e: Exception) {
-                        Log.d("FavAdapterNAV", "Nav Exeption: $e")
-                        Log.d("FavAdapterItem", "Item : $item")
-                    }
+                    val navOptions = NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
+                        .setExitAnim(R.anim.slide_out_left).setPopEnterAnim(R.anim.slide_in_right)
+                        .setExitAnim(R.anim.slide_out_left).build()
+
+                    it.findNavController()
+                        .navigate(
+                            HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id),
+                            navOptions
+                        )
                 }
             }
         }
