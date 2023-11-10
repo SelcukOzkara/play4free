@@ -28,6 +28,7 @@ import kotlinx.coroutines.tasks.await
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
+    //region variablen
     private val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
     private val storage = Firebase.storage.reference
@@ -37,7 +38,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val gameList = repo.gameList
     val giveawayList = repo.giveawayList
     val searchResult = repo.searchtResult
-
 
 
     private val _gameDetail: MutableLiveData<GameDetail> = MutableLiveData()
@@ -57,6 +57,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         get() = _status
 
     lateinit var profileRef: DocumentReference
+
+    //endregion
 
     init {
         setupUserEnv()
@@ -152,8 +154,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _user.value = firebaseAuth.currentUser
     }
 
-
-
     fun signIn(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { it ->
             if (it.isSuccessful) {
@@ -208,12 +208,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             uploadTask.await()
 
             if (uploadTask.isSuccessful) {
-                            val imageUrl = imageRef.downloadUrl.await()
-                            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
-                                .update("pb", imageUrl).addOnSuccessListener {
-                                    setupUserEnv()
-                                }
-                        }
+                val imageUrl = imageRef.downloadUrl.await()
+                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+                    .update("pb", imageUrl).addOnSuccessListener {
+                        setupUserEnv()
+                    }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -223,11 +223,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         return System.currentTimeMillis().toString()
     }
 
-    fun getCommentDocumentReference(commentIdentifier: String) : DocumentReference{
+    fun getCommentDocumentReference(commentIdentifier: String): DocumentReference {
         return firestore.collection("comments").document(commentIdentifier)
     }
 
-    fun addCommentToComments(commentIdentifier: String, comment : Comments) {
+    fun addCommentToComments(commentIdentifier: String, comment: Comments) {
         firestore
             .collection("comments")
             .document(commentIdentifier)

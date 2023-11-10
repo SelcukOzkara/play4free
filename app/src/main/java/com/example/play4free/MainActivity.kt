@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navController)
 
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
-
             Log.e(
                 "Stack",
                 navController.currentBackStack.value.joinToString {"${it.destination.displayName}\n" })
@@ -29,8 +28,6 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
-
     }
-
 
 }

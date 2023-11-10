@@ -18,7 +18,7 @@ class AppRepository(
     private val database: GameDatabase
 ) {
 
-
+    //region Variable
     private val _gameList: LiveData<List<Games>> = database.gameDao.getAllGames()
 
     val gameList: LiveData<List<Games>>
@@ -32,9 +32,11 @@ class AppRepository(
     val searchtResult: LiveData<List<Games>>
         get() = _searchResult
 
+    //endregion
+
     suspend fun getGameList() {
         try {
-            if (database.gameDao.getCount() == 0){
+            if (database.gameDao.getCount() == 0) {
                 val gameList = api.retrofitService.getGamesList()
                 database.gameDao.insertGameList(gameList)
             }

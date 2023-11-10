@@ -75,6 +75,8 @@ class LoginFragment : Fragment() {
         }
     }
 
+
+    // Dialog für die Registration
     private fun showDialog() {
         val signUpBinding: SignUpBinding = SignUpBinding.inflate(layoutInflater)
         val dialog = Dialog(requireContext())
@@ -153,6 +155,7 @@ class LoginFragment : Fragment() {
         dialog.show()
     }
 
+    // Dialog zum Passwort zurücksetzen
     private fun showResetDialog() {
         val resetBinding: ResetPwBinding = ResetPwBinding.inflate(layoutInflater)
         val dialog = Dialog(requireContext())
