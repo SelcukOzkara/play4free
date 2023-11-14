@@ -70,7 +70,7 @@ class DetailFragment : Fragment() {
                 var count = it.screenshots.count() -1
 
                 for (image in it.screenshots) {
-                    if (!it.screenshots.isNullOrEmpty() && count >= 0) {
+                    if (it.screenshots.isNotEmpty() && count >= 0) {
                         detailScreenshotsTTV.visibility = View.VISIBLE
                         when (count) {
                             0 -> {
@@ -158,7 +158,7 @@ class DetailFragment : Fragment() {
                 commentDocumentReference.collection("comment").addSnapshotListener { value, error ->
                     if (error == null && value != null) {
                         val comments = value.toObjects<Comments>().sortedBy { it.timestamp }.takeLast(5)
-                        commentRV.adapter = CommentAdapter(comments, viewModel.user.value?.uid , requireContext(), viewModel)
+                        commentRV.adapter = CommentAdapter(comments, requireContext(), viewModel)
                     } else {
                         Log.e("FirebaseLog",
                             "Error retrieving chat with identifier: $commentIdentifier $value $error"
