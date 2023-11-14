@@ -1,16 +1,12 @@
 package com.example.play4free.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
-import android.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -44,8 +40,8 @@ class HomeFragment : Fragment() {
             if (binding.refreshSwipe.isRefreshing) binding.refreshSwipe.isRefreshing = false
         }
 
-        var toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
-        var icon = toolbar.findViewById<ImageButton>(R.id.imageButton)
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
+        val icon = toolbar.findViewById<ImageButton>(R.id.imageButton)
 
         toolbar.visibility = View.VISIBLE
         icon.visibility = View.GONE

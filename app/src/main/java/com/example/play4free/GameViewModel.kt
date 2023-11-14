@@ -2,7 +2,6 @@ package com.example.play4free
 
 import android.app.Application
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData

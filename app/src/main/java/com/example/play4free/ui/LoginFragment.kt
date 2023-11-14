@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -51,7 +50,7 @@ class LoginFragment : Fragment() {
         binding.loginPwResetTV.setOnClickListener {
             showResetDialog()
         }
-        var toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
 
         toolbar.visibility = View.GONE
 

@@ -4,8 +4,6 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
@@ -14,11 +12,9 @@ import com.example.play4free.R
 import com.example.play4free.data.datamodels.Comments
 import com.example.play4free.data.datamodels.Profile
 import com.example.play4free.databinding.CommentItemBinding
-import com.example.play4free.databinding.FragmentDetailBinding
 
 class CommentAdapter(
     val dataset: List<Comments>,
-    var currentUserId: String?,
     val context: Context,
     val viewmodel: GameViewModel
 ) : RecyclerView.Adapter<CommentAdapter.MessageViewHolder>() {

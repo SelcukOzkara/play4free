@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.provider.Settings.Global
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -64,14 +63,13 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.favRV.adapter = favAdapter
 
-        var toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
-        var icon = toolbar.findViewById<ImageButton>(R.id.imageButton)
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.toolbar)
+        val icon = toolbar.findViewById<ImageButton>(R.id.imageButton)
 
         toolbar.visibility = View.VISIBLE
         icon.visibility = View.VISIBLE
 
         var username: String?
-        var date: String?
         var pb: String?
 
         viewModel.currentUserProfile.observe(viewLifecycleOwner) {
@@ -108,6 +106,7 @@ class DashboardFragment : Fragment() {
         }
     }
 
+    //Dialog zum bearbeiten des eigenen Profils
     private fun showDialog() {
         val binding: ProfilEditBinding = ProfilEditBinding.inflate(layoutInflater)
         val dialog = Dialog(requireContext())
