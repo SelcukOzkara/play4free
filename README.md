@@ -19,6 +19,15 @@ This app is based on the API of Free2Play and GamePower.
 - Pull to refresh (Currently only for the free to play titles )
 - Comments
 
+## Screenshots
+
+<p float="left">
+  <img src="/app/screenshots/screen1.png" width="200" />
+  <img src="/app/screenshots/screen2.png" width="200" />
+  <img src="/app/screenshots/screen3.png" width="200" />
+  <img src="/app/screenshots/screen4.png" width="200" />
+</p>
+
 ## Tech Usage of Android
 
 - [MVVM Pattern](https://developer.android.com/topic/architecture)
