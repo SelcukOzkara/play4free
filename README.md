@@ -1,9 +1,8 @@
+<p float="left">
+  <img src="/app/src/main/res/drawable/logo.png" width="100" />
+</p> 
 
-![Logo](https://github.com/SelcukOzkara/play4free/blob/main/app/src/main/res/drawable/logo.png)
-
-
-
-# Overview
+# Play4Free - Overview
 
 Play4Free is an Android application based on Kotlin. It offers many free-to-play titles as well as a list of giveaways.
 
@@ -34,4 +33,24 @@ This app is based on the API of Free2Play and GamePower.
 - [Swiperefreshlayout](https://developer.android.com/develop/ui/views/touch-and-input/swipe/add-swipe-interface)
 
 
+## Installation
 
+1. Clone FreeToGame App with **Git**
+
+```git
+  git clone https://github.com/SelcukOzkara/play4free.git
+
+```
+
+2. Open the project in Android Studio
+
+3. Compile the source and run it using your physical device or the implemented Android Emulator
+
+## Contributing
+
+Contributions are always welcome!
+
+
+## Authors
+
+- [@SelcukOzkara](https://github.com/SelcukOzkara)
