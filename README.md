@@ -26,6 +26,7 @@ This app is based on the API of Free2Play and GamePower.
   <img src="/app/screenshots/screen2.png" width="200" />
   <img src="/app/screenshots/screen3.png" width="200" />
   <img src="/app/screenshots/screen4.png" width="200" />
+  <img src="/app/screenshots/screen5.png" width="200" />
 </p>
 
 ## Tech Usage of Android
